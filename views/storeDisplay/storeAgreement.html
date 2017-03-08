@@ -1,0 +1,33 @@
+<section id="storeAgreementPage">
+  <div class="column color-333 f30 bbd7d7d7">
+    <p><span data-bind="text:protocol().planId">C-0000001</span><span class="ml15" data-bind="text:protocol().storeName">广州-沃尔玛-新塘店</span></p>
+    <p class="mt20">协议时间：<span class="ml15"><!-- ko text:app.util.formatDate(protocol().protocolStartTime) --><!-- /ko -->-<!-- ko text:app.util.formatDate(protocol().protocolEndTime) --><!-- /ko --></span></p>
+  </div>
+  <article>
+    <p class="label-colum">陈列信息</p>
+    <ul class="pl20 pr20 bg-fff color-333 f30 bbd7d7d7">
+      <li class="column-item flex">
+        <p class="flex-1">陈列类型</p>
+        <p class="color-666" data-bind="text:protocol().displayTypeText">浓缩专柜-货架</p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">陈列位置</p>
+        <p class="color-666" data-bind="text:protocol().displayLocation">迎人流方向第一位</p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">面积(㎡)</p>
+        <p class="color-666"><span data-bind="text:protocol().area">0.8</span></p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">是否需要装修</p>
+        <p class="color-666" data-bind="text:protocol().signRenovationBText">是</p>
+      </li>
+    </ul>
+  </article>
+  <article data-bind="visible:prdList().length">
+    <p class="label-colum">陈列产品</p>
+    <ul class="pl20 pr20 bg-fff color-333 f30 bbd7d7d7" data-bind="foreach:prdList">
+      <li class="column-product flex" data-bind="text:prdName">机洗至尊素雅兰香亮白增艳洗衣液</li>
+    </ul>
+  </article>
+</section>

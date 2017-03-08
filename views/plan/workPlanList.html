@@ -1,0 +1,23 @@
+<section id="workPlanListPage">
+  <!-- ko foreach:list -->
+  <div class="workPlanList flex" data-bind="click:$parent.goDetails">
+    <div class="pr20 solid-right-d7d7d7  date color-1fb8ff">
+      <p class="f28" data-bind="text:app.util.formatPattern(planDate,'MM/dd')"></p>
+      <p class="f34" data-bind="text:app.util.getDay(planDate)"></p>
+    </div>
+    <div class="flex-1 pl20 color-333 plan pr20">
+      <!-- ko if:validFlag=='VALID_PLAN' -->
+      <p  class="f28" data-bind="foreach:storeList,css:{smallLineHeight:storeList.length> 2}">
+        <span data-bind="text:storeName"></span><span class="color-1fb8ff" data-bind="visible:$parent.storeList.length>$index()+1">&nbsp;/</span>
+      </p>
+      <p class="f24" data-bind="css:{smallLineHeight:storeList.length> 2}" >￥<span data-bind="text:app.util.formatPrice(price)"></span>, <span data-bind="text:prdNum"></span>支, <span data-bind="text:planNum"></span>个计划</p>
+      <!-- /ko -->
+      <p class="rest color-333" data-bind="visible:validFlag=='TODAY_REST'">今日休息</p>
+      <p class="rest color-999"  data-bind="visible:validFlag=='NO_PLAN'">未制定计划</p>
+    </div>
+    <div class="right">
+      <img src="./images/icon/right.93c9afb7.png" alt=""/>
+    </div>
+  </div>
+  <!--/ko -->
+</section>

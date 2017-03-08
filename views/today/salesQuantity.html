@@ -1,0 +1,146 @@
+<section id="salesQuantityPage">
+    <section class="header pl20 pr20 bg-fff solid-bottom-d7d7d7 pr">
+        <div class="color-333 f28 ">
+            <span data-bind="text:app.util.formatDate(planDate())">2016-04-18</span>
+            <span data-bind="text:app.util.getDay(planDate())">周一</span>
+            <span class="fr status color-999 mr20"  data-bind="text:switchText">上班</span>
+        </div>
+    </section>
+    <!-- ko if:isOnWork -->
+    <section class="bg-fff mt20 solid-bottom-d7d7d7">
+        <div class="planTag clearfix tc color-999 f28">
+            <div class="selected">
+                <div>实际1</div>
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="areaInfo pl20 f28" data-bind="if:selectedPlan">
+            <div class="flex pt30 pb30 pr20 solid-bottom-e5e5e5">
+              <div>
+                <img class="shop fl mr20" src="./images/icon/shop.73887a92.png" alt=""/>
+              </div>
+              <div class="flex-1">
+                <span data-bind="text:selectedPlan().storeId()">20000101</span><span class="pl20" data-bind="text:selectedPlan().storeName()">广州-大润发-新塘店</span>
+              </div>
+                <!--<img class="fr" src="./images/icon/right.93c9afb7.png" alt=""/>-->
+            </div>
+
+            <!--<div class="wortkType solid-top-e5e5e5 pt20 pb10" data-bind="foreach: classList">-->
+                <!--<div class="btn mb30" data-bind="text: fieldDesc, css:{selected: $root.classIsExist($data)}, click: $parent.selectClass">早班</div>-->
+            <!--</div>-->
+            <div class="pt30 pb30 pr20 flex"><img class="time mr20" src="./images/icon/time.31119951.png" alt=""/>
+              <div class="flex-1 time">
+                <span data-bind="text:selectedPlan().classDesc">早班</span>：
+                <span data-bind="foreach:selectedPlan().workTime()" style="line-height: 0.94rem">
+                  <!-- ko text:app.util.formatTimeMin(enterTime) --> <!-- /ko -->-<!-- ko text:app.util.formatTimeMin(leaveTime) --> <!-- /ko -->
+                </span>
+              </div>
+            </div>
+        </div>
+    </section>
+    <!-- ko if:selectedPlan -->
+    <section class="pl20 pr20 bg-fff mt20 solid-bottom-d7d7d7 f28">
+        <p class="pt30 pb20 f28 color-333">工作任务</p>
+        <div class="wortkType" data-bind="foreach: taskList">
+            <div class="btn mb30" data-bind="text: fieldDesc, css:{selected: $root.taskIsExist($data)}, click: $parent.selectTask">晚班</div>
+        </div>
+
+    </section>
+    <section class="productBox mt20 bg-fff solid-bottom-d7d7d7 mb20 f28">
+      <div class="solid-bottom-d7d7d7 p20 color-1fb8ff" >
+          <span data-bind="click:show">至尊提报规则</span>
+          <img src="./images/icon/questionMark.17c36591.png" data-bind="click:show" class="icon vm" alt="规则">
+      </div>
+      <div class="pl20 pr20">
+        <div class="dashed-bottom-ebebeb height80">
+            <span class="color-333 f28 ">品种数：<span data-bind="text:selectedPlan().prdList().length "></span></span>
+            <div class="btn tc fr color-666 ml20" data-bind="click: addProduct">添加产品</div>
+            <div class="btn tc fr color-666" data-bind="click:groupBuying,css:{none:$root.showGroupBuying}">提报团购</div>
+            <div class="btn tc fr color-666 finish" data-bind="click:groupBuying,css:{none:!$root.showGroupBuying()}">完成</div>
+        </div>
+        <div class="clearfix solid-bottom-e5e5e5 height80">
+            <span class="fl">总支数：<span data-bind="text: selectedPlan().totalNum()">2</span></span>
+            <span class="fr">总金额：¥<span data-bind="text: app.util.priceTransform(selectedPlan().totalPrice())"></span></span>
+        </div>
+        <!-- ko foreach: selectedPlan().prdList -->
+        <div class="pt20 pb20 dashed-bottom-ebebeb">
+            <p class="pb30" data-bind="text: prdName">1101 660g机洗滚筒亮白组合-兰香x12</p>
+          <div>
+            <!-- 零售模块 -->
+            <!-- ko if:!$root.showGroupBuying() -->
+            <div class="clearfix amountBox">
+                <span class="fl mr20">零售</span>
+                <div class="fl">
+                    <div class="clearfix ">
+                        <img class="fl" src="./images/icon/minus.126ea2da.png" data-bind="click: reduceNum"/>
+                        <!--<div class="fl amountText tc" data-bind="text: prdNum">999</div>-->
+                        <input style=" width: 2.5rem;margin: 0;padding: 0 " class="fl amountText tc" type="tel" data-bind="click:changPosition,value:prdNum"/>
+                        <img class="fl" src="./images/icon/plus.8e608519.png" data-bind="click: addNum"/>
+                    </div>
+                </div>
+                <span class="fr">¥<span data-bind="text: app.util.priceTransform(price()*prdNum())"></span></span>
+            </div>
+            <!-- /ko -->
+          <!-- 团购模块 -->
+            <div class="clearfix amountBox" data-bind="css:{none:!$root.showGroupBuying()&&groupBuyVo().prdNum()==0}">
+                <span class="fl mr20">团购</span>
+                <div class="fl">
+                    <div class="clearfix ">
+                        <img class="fl" src="./images/icon/minus.126ea2da.png" data-bind="click: reduceGroupNum"/>
+                        <input style=" width: 2.5rem;margin: 0;padding: 0 " class="fl amountText tc" type="tel" data-bind="click:changPosition,value:groupBuyVo().prdNum"/>
+                        <img class="fl" src="./images/icon/plus.8e608519.png" data-bind="click: addGroupNum"/>
+                    </div>
+                </div>
+                <span class="fr">¥<span data-bind="text: app.util.priceTransform(price()*groupBuyVo().prdNum())"></span></span>
+            </div>
+          </div>
+        </div>
+        <!-- /ko -->
+      </div>
+    </section>
+    <article class="pl20 pr20 bg-fff solid-bottom-d7d7d7" data-bind="visible:groupBuyisExist">
+        <div class="flex pt20 pb20 bbebebeb">
+            <p class="flex-1 w0">团购凭证</p>
+            <div class="flex" data-bind="click:uploadPic">
+                <span class="flex-1 color-999">上传</span>
+                <div class="btn-more ml20"></div>
+            </div>
+        </div>
+        <div class="flex pt20 pb20 f28">
+            <span>备注：</span>
+            <input class="flex-1" type="text" style="border: none;margin:0;" data-bind="value:selectedPlan().remark" placeholder="选填，至多填160字" maxlength="160" />
+        </div>
+    </article>
+    <article class="flex mt20 pl20 pr20 bg-fff reason solid-bottom-d7d7d7"  data-bind="visible:selectedPlan().totalNum()==0">
+        <div>
+            <span class="f28 color-333">零销量原因：</span>
+        </div>
+      <input type="text" class="flex-1 f28 db" style="margin-left: 0;" placeholder="请填写原因，至多160个字" data-bind="value:selectedPlan().noSalesReason,valueUpdate:'afterkeydown'" maxlength="160"/>
+    </article>
+  <div class="pl50 pr50">
+        <div class="btn bg-ff6c47 mb20 commit " data-bind="click:submitPlan,css:{disabled:isSubmit}">提 交</div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+  <!-- 图片查看 begin -->
+  <article class="cover-bg" data-bind="css:{none:isHidden}">
+    <div class="btn-close-glasses tr" >
+      <img src="./images/icon/closeGlasses.846f72ab.png" data-bind="click:show" alt="" class="icon-glasses">
+    </div>
+
+    <div class="img-glasses">
+      <img id="focusphoto" data-bind="attr:{src:picPath}" />
+    </div>
+    <div class="pa bottom btn-glasses">
+      <div>
+        <img src="./images/icon/zoomOut.1da37d30.png" alt="" class="icon-glasses" onclick="photoSize.action(-1);">
+        <img src="./images/icon/zoomIn.aac85747.png" alt="" class="icon-glasses spacing" onclick="photoSize.action(1);">
+      </div>
+    </div>
+
+  </article>
+  <!-- end -->
+</section>

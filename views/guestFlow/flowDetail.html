@@ -1,0 +1,119 @@
+<section id="flowDetailPage" data-bind="if:itemList()">
+  <div class="column-info pl20">
+    <p class="title" data-bind="text:itemList().storeName">金华-世纪华联-义务南门店义务南门义务南门店义务南门</p>
+  </div>
+  <!-- 月客流量模块 -->
+  <article>
+    <div class="column-info mb20 bbd7d7d7" data-bind="visible:timeType()=='MONTH_TYPE'">
+      <div class="amount flex">
+        <p class="flex-1 solid-right-e5e5e5 tc">月成交额：<span class="money f28" data-bind="text:app.util.toFixedTwo(itemList().sumPrice/10000)">1000.23</span><span class="money f20">(万)</span></p>
+        <p class="flex-1 tc">日均成交额：<span class="money f28" data-bind="text:app.util.toFixedTwo(itemList().averageSumPrice/10000)">1000.23</span><span class="money f20">(万)</span></p>
+      </div>
+    </div>
+    <div class="column-info mb20 bbd7d7d7" data-bind="visible:timeType()=='DAY_TYPE'">
+      <p class="amount ml20">
+        日成交额：<span class="money f28" data-bind="text:itemList().sumPrice>=10000?app.util.toFixedTwo(itemList().sumPrice/10000):itemList().sumPrice">1000.23</span>
+        <span class="money f20"  data-bind="css:{none:itemList().sumPrice<10000}">(万)</span>
+        <span class="money f20" data-bind="css:{none:itemList().sumPrice>=10000}">(元)</span>
+      </p>
+    </div>
+    <div class="column-info mb20 bbd7d7d7" data-bind="visible:timeType()=='TIME_TYPE'">
+      <p class="amount ml20">时段成交额：<span class="money f28" data-bind="text:itemList().sumPrice">1000.23</span><span class="money f20">(元)</span></p>
+    </div>
+    <div class="column-input column f28">
+      <div class="item-input flex" data-bind="visible:timeType()=='MONTH_TYPE'">
+        <p class="label-input">日期</p>
+        <p class="input-date color-666" data-bind="text:app.util.formatDate(itemList().startDate)">2016-12-06</p>
+        <p class="color-666">至</p>
+        <p class="input-date color-666" data-bind="text:app.util.formatDate(itemList().endDate)">2016-12-06</p>
+        <p class="flex-1 tr f28 color-00baff">共<!-- ko text:sumDay --><!-- /ko -->天</p>
+      </div>
+      <div class="item-input flex" data-bind="visible:timeType()=='DAY_TYPE'">
+        <p class="label-input">日期</p>
+        <p class="flex-1 tr color-666" data-bind="text:app.util.formatDate(itemList().startDate)">2016-12-06</p>
+      </div>
+      <div class="item-input flex" data-bind="visible:timeType()=='TIME_TYPE'">
+        <p class="label-input">时段</p>
+        <p class="input-date color-666" data-bind="text:app.util.formatDate(itemList().startDate)">2016/12/06</p>
+        <!--<p class="color-666">至</p>-->
+        <p class="input-date color-666"><!-- ko text:app.util.formatTimeMin(itemList().startDate) --><!-- /ko -->-<!-- ko text:app.util.formatTimeMin(itemList().endDate) --><!-- /ko --></p>
+        <p class="flex-1 tr f24 color-00baff"><!-- ko text:sumHour --><!-- /ko -->小时</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input"><!-- ko text:timeLabel --><!-- /ko -->进店人数(人)</p>
+        <p class="flex-1 tr color-666" data-bind="text:itemList().personNum">10380</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input"><!-- ko text:timeLabel --><!-- /ko -->成交单数</p>
+        <p class="flex-1 tr color-666" data-bind="text:itemList().billNum">1000</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input"><!-- ko text:timeLabel --><!-- /ko -->平均客单价(元)</p>
+        <p class="flex-1 tr color-666" data-bind="text:itemList().averagePrice">132432</p>
+      </div>
+      <div class="item-input flex pr">
+        <p class="label-input">数据来源</p>
+        <p class="flex-1 right tr color-666" data-bind="text:dataSourseText"></p>
+      </div>
+      <div class="item-input" data-bind="css:{flex:!itemList().remark}">
+        <p class="label-input">备注</p>
+        <!-- ko if:!itemList().remark --><p class="flex-1 right tr color-666">无</p><!-- /ko -->
+        <!-- ko if:itemList().remark -->
+        <textarea class="remark mt20 border-none f24 color-666" data-bind="text:itemList().remark" readonly>这里是备注备注备注啊林俊杰</textarea>
+        <!-- /ko -->
+      </div>
+    </div>
+  </article>
+  <!-- 日客流量模块 -->
+  <article class="none">
+    <div class="column-input column f28">
+
+      <div class="item-input flex">
+        <p class="label-input">日进店人数(人)</p>
+        <p class="flex-1 tr color-666">10380</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input">日成交单数</p>
+        <p class="flex-1 tr color-666">1000</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input">日平均客单价(元)</p>
+        <p class="flex-1 tr color-666">132432</p>
+      </div>
+      <div class="item-input flex pr">
+        <p class="label-input">数据来源</p>
+        <p class="flex-1 right tr color-666">零售商门店口头告知</p>
+      </div>
+      <div class="item-input">
+        <p class="label-input">备注</p>
+        <textarea class="remark mt20 border-none f24 color-666" readonly>这里是备注备注备注啊林俊杰</textarea>
+      </div>
+    </div>
+  </article>
+  <!-- 时段客流量模块 -->
+  <article class="none">
+    <div class="column-input column f28">
+
+      <div class="item-input flex">
+        <p class="label-input">时段进店人数(人)</p>
+        <p class="flex-1 tr color-666">10380</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input">时段成交单数</p>
+        <p class="flex-1 tr color-666">1000</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input">时段平均客单价(元)</p>
+        <p class="flex-1 tr color-666">132432</p>
+      </div>
+      <div class="item-input flex pr">
+        <p class="label-input">数据来源</p>
+        <p class="flex-1 right tr color-666">零售商门店口头告知</p>
+      </div>
+      <div class="item-input">
+        <p class="label-input">备注</p>
+        <textarea class="remark mt20 border-none f24 color-666" readonly>这里是备注备注备注啊</textarea>
+      </div>
+    </div>
+  </article>
+</section>

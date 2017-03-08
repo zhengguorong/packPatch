@@ -1,0 +1,48 @@
+<section class="f30" id="editStoreRelationPage">
+  <div class="bbd7d7d7">
+    <div class="column flex">
+      <p class="icon"></p>
+      <div class="flex-1 pb30 solid-bottom-e5e5e5">
+        <p class="column-text"><!-- ko text:item().userId --><!-- /ko --> <!-- ko text:item().userName --><!-- /ko --></p>
+        <p class="mt20 color-999 column-text f24"><!-- ko text:item().department --><!-- /ko --> <!-- ko text:item().positionDesc --><!-- /ko --></p>
+      </div>
+    </div>
+    <div class="column flex">
+      <p class="icon icon-address"></p>
+      <div class="flex-1 pb30">
+        <p class="pr20"><span class="vt column-text"><!-- ko text:storeId --><!-- /ko --> <!-- ko text:storeName --><!-- /ko --></span></p>
+      </div>
+    </div>
+  </div>
+  <div class="column mt20 flex bbd7d7d7 none">
+    <p class="icon icon-address"></p>
+    <p><span class="vm column-text">门店</span></p>
+    <div class="flex-1 pb30 tr pr20"><span class="vt column-text color-999">请选择门店</span></div>
+  </div>
+  <div class="column mt20 flex column-text">
+    <p class="icon icon-time"></p>
+    <p class="flex-1 pb20 solid-bottom-e5e5e5 column-text">关系开始日期</p>
+    <div class="pr">
+      <input class="column-date border-none solid-bottom-e5e5e5 color-666" id="begin" type="text" readonly data-bind="value:dateFromText"/>
+      <p class="pa top bottom left right" data-bind="visible:dateFrom()>new Date().getTime"></p>
+    </div>
+  </div>
+  <div class="column flex bbd7d7d7">
+    <p class="icon icon-none"></p>
+    <p class="flex-1 pb30 ">关系结束日期</p>
+    <input class="column-date border-none color-666" type="text" id="end" readonly data-bind="value:dateToText"/>
+  </div>
+  <div class="column mt20 flex bbd7d7d7">
+    <p class="icon icon-task"></p>
+    <div class="flex-1">
+      <p class="column-text">工作内容</p>
+      <div class="pt20 pb30 clearfix" data-bind="foreach:taskList">
+        <p class="item-task" data-bind="click:$root.check,css:{active:isSelected()}"><!-- ko text:taskDesc --><!-- /ko --></p>
+      </div>
+    </div>
+  </div>
+  <div class="mt30 pl20 pr20 pb30 flex">
+    <button class="btn db btn-confirm-hollow flex-1 mr20 f30" data-bind="click:remove">删 除</button>
+    <button class="btn db btn-confirm flex-1 f30" data-bind="click:submit">保 存</button>
+  </div>
+</section>

@@ -1,0 +1,114 @@
+<section class="pr" id="vacationUsedPage">
+  <article class="pl20 pr20 bg-fff" id="column-vacate-id">
+    <div class="pt20 pb20 flex dashed-bottom-ebebeb">
+      <p class="flex-1">请假单号</p>
+      <p data-bind="text:$root.applyNo"></p>
+    </div>
+  </article>
+  <article class="column-vacate-state flex bg-fff bbd7d7d7" id="column-vacate-state" data-bind="click:LogSwitch">
+    <ul class="flex-1" data-bind="foreach:currentStatus">
+      <li class="item-vacate-state color-666 f28">
+        <div class="flex">
+          <p class="flex-1" data-bind="text:app.util.getLeaveStatus(orderStatus).orderStatusShow,css:{'color-ff6c47':orderStatus==='BACK_REJECT'||orderStatus==='FILE_REJECT'}"></p>
+          <p data-bind="text:app.util.formatDateTime(operationDate)"></p>
+        </div>
+      </li>
+    </ul>
+    <p class="ml20" data-bind="css:{'btn-close':isShowLog(),'btn-omit':!isShowLog()},visible:history().length>1"></p>
+  </article>
+  <article class="column-time f28 bbd7d7d7">
+    <!-- 总时长 -->
+    <div class="item-total item-time pr flex mt20 f28 pl20 pr20 bg-fff">
+      <div>总时长</div>
+      <div class="flex-1 tr">
+        <input type="tel" class="input-vacate-time ml20 mr10 color-ff6c47" data-bind="value:totalHour().day,enable:!isEditDisabled()" />天
+        <input type="tel" class="input-vacate-time ml20 mr10 color-ff6c47" data-bind="value:totalHour().hour,enable:!isEditDisabled()"/>小时
+      </div>
+      <span class="arrow pa" data-bind="visible:leaveList().length != 0"></span>
+    </div>
+    <!-- 类型列表 -->
+    <ul class="list-time pr pr20 pl20 bg-f5f5f5 f28 color-333" data-bind="foreach:leaveList">
+      <li class="item-time flex">
+        <p data-bind="text:leaveDesc"></p>
+        <div class="flex-1 mr30 pr10 tr color-999">
+          <span data-bind="visible:app.util.leaveHourTransform(hour()).day > 0"><!-- ko text:app.util.leaveHourTransform(hour()).day --><!-- /ko -->天</span><span data-bind="visible:app.util.leaveHourTransform(hour()).hour > 0 || hour()==0"><!-- ko text:app.util.leaveHourTransform(hour()).hour --><!-- /ko -->小时</span>
+        </div>
+        <p class="btn-edit" data-bind="click:$parent.editSwitch,disable:$parent.isEditDisabled()"></p>
+        <p class="btn-del" data-bind="click:$parent.delLeave"></p>
+      </li>
+    </ul>
+    <!-- 添加 -->
+    <div class="item-time pl20 pr20 bg-f5f5f5" data-bind="click:editSwitch.bind($data,''),visible:leaveList().length<4">
+      <div class="soild-top-fff">
+        <img class="icon-add-time" src="./images/icon/add-blue@2x.96f69087.png"/>
+        <span class="f28 color-333">添加请假类型</span>
+      </div>
+    </div>
+  </article>
+  <article class="mt20 p20 bg-fff bbd7d7d7 f28 color-333">
+    <p class="mb20">请假时间</p>
+    <div class="flex">
+      <div class="flex-1 pr">
+        <input id="vacationUsedStart"  class="w border-none color-ff6c47 bg-fff" type="text" data-bind="value:startDate,disable:isEditDisabled()"/>
+        <div class="pa top bottom left right" data-bind="visible:isEditDisabled()"></div>
+      </div>
+      <p>至</p>
+      <div class="flex-1 pr">
+        <input id="vacationUsedEnd"  class="w border-none color-ff6c47 bg-fff tr" type="text" data-bind="value:endDate,disable:isEditDisabled()"/>
+        <div class="pa top bottom left right" data-bind="visible:isEditDisabled()"></div>
+      </div>
+    </div>
+  </article>
+  <article class="mt20 p20 bg-fff bbd7d7d7 f28 color-333">
+    <p class="mb20">原因</p>
+    <textarea class="w border-none bg-fff" rows="2" maxlength="200" data-bind="value:leaveReason,enable:!isEditDisabled()"></textarea>
+  </article>
+  <article class="column-series mt20 pl20 pr20 bg-fff bbd7d7d7" data-bind="click:goToUpload">
+    <div class="flex">
+      <p class="flex-1">
+        <!-- ko if : currentOrderType()=='BACK_APPLY' -->销假证明<!-- /ko -->
+        <!-- ko ifnot : currentOrderType()=='BACK_APPLY' -->请假证明<!-- /ko -->
+      </p>
+      <p class="color-999"><!-- ko if:fileList().length>0 -->继续<!-- /ko -->上传</p>
+      <p class="btn-more ml20"></p>
+    </div>
+  </article>
+  <!-- 假期编辑弹框 -->
+  <article class="column-edit-vacate" data-bind="visible:isShowEdit()">
+    <ul class="p10 bg-fff ovh" data-bind="foreach:leaveTypeList">
+      <li class="item-vacate-type fl" data-bind="css:{'active':fieldCode==$parent.activeId(),'disable':$parent.currentLeaveType().indexOf(fieldCode)!=-1}"><input type="text" readonly class="tap-vacate-type" data-bind="value:fieldDesc,click:$parent.selectLeaveTap,disable:$parent.currentLeaveType().indexOf(fieldCode)!=-1" /></li>
+    </ul>
+    <!-- 时长 -->
+    <div class="item-total column-series pr flex f28 bg-fff">
+      <div class="flex-1 pl20">时长</div>
+      <div class="w50 flex">
+        <div class="flex-1 ml10"><input type="tel" class="input-vacate-time mr10 color-ff6c47" data-bind="value:activeDay,valueUpdate: 'afterkeydown'"/>天</div>
+        <div class="flex-1 ml10"><input type="tel" class="input-vacate-time mr10 color-ff6c47" data-bind="value:activeHour,valueUpdate: 'afterkeydown'"/>小时</div>
+      </div>
+    </div>
+    <div class="flex p20 bg-fff">
+      <div class="flex-1 mr20"><button class="btn btn-submit column-series w f30" data-bind="click:hideEdit">取消</button></div>
+      <div class="flex-1"><button class="btn btn-submit-hollow column-series w f30" data-bind="click:saveEditLeave">确定</button></div>
+    </div>
+  </article>
+  <article id="column-log" class="column-log" data-bind="visible:isShowLog()">
+    <div class="area-log ova">
+      <ul data-bind="foreach:history">
+        <li class="item-log">
+          <p>
+            <span data-bind="text:processNode"></span>
+            <span class="ml10" data-bind="text:date"></span>
+          </p>
+          <p data-bind="visible:reason">原因：<!-- ko text:reason --><!-- /ko --></p>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="mt10 p20 color-ff6c47 f28 none">
+    您的销假证明文件最终审核不通过，请尽快将销假申请连同相关资料线下提交至相关人士专员，否则会按事假处理！如有疑问，请联系相关人事专员咨询。
+  </article>
+  <footer class="flex p20" data-bind="visible:!isHideSubmit()">
+    <div class="flex-1 mr20"><button class="btn btn-confirm column-series w f30" data-bind="click:reset">重置</button></div>
+    <div class="flex-1"><button class="btn btn-confirm-hollow column-series w f30" data-bind="click:saveLeaveApplyInfo,disable:isSubmit()">提交</button></div>
+  </footer>
+</section>

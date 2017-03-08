@@ -1,0 +1,35 @@
+<section id="userInfoPage">
+  <ul class="pl20 pr20 bg-fff bbd7d7d7 color-333 f28">
+    <li class="flex pt20 pb20 bbd7d7d7">
+      <p class="flex-1">姓名</p>
+      <p data-bind="text:realName"></p>
+    </li>
+    <li class="flex pt20 pb20 bbd7d7d7">
+      <p class="flex-1">员工编号</p>
+      <p data-bind="text:account"></p>
+    </li>
+    <li class="flex pt20 pb20 bbd7d7d7">
+      <p class="flex-1">手机号码</p>
+      <p data-bind="text:phone"></p>
+    </li>
+    <li class="flex pt20 pb20" data-bind="click:changeCode">
+      <p class="flex-1">我的二维码</p>
+      <p class="icon-code"></p>
+    </li>
+  </ul>
+  <ul class="mt20 bg-fff color-333 f28">
+    <li class="flex p20 bbd7d7d7" data-bind="click:goToChangePwd">
+      <p class="flex-1">修改密码</p>
+      <div class="btn-more"></div>
+    </li>
+  </ul>
+  <div class="pf bottom right left pl50 pr50 pb30 mb5">
+    <button class="btn-logout w f30 color-fff" data-bind="click:logOut">退出当前登录</button>
+  </div>
+  <article class="cover-bg tc" data-bind="visible:isShowCode(),click:changeCode">
+    <div class="column-code dib">
+      <p class="mb20 pb20 tc">我的二维码</p>
+      <p id="userQrCode"></p>
+    </div>
+  </article>
+</section>

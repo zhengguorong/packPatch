@@ -1,0 +1,86 @@
+<section id="saleDetailPage">
+  <header class="flex pl20 pr20 pt30 pb30 bg-fff bbd7d7d7 f28">
+    <div class="flex-1 color-333" data-bind="text:currentTime"></div>
+    <span class="color-999">上班</span>
+  </header>
+
+  <nav class="nav-sale mt20 pt20 pb20 bg-fff bbd7d7d7 color-999"
+       data-bind="foreach:tapList,visible:actualLength()">
+    <span class="nav-sale-item"
+          data-bind="text:tapName,css:{active : $parent.selectedPlan() == planId()},click:$parent.selectTap"></span>
+  </nav>
+
+  <!-- 内容 start-->
+  <div data-bind="foreach:actualList,visible:actualLength()">
+    <article data-bind="visible:$parent.selectedPlan()==planId">
+      <ul class="sale-detail-list bg-fff vm">
+        <li class="sale-detail-item sale-detail-store ">
+          <span data-bind="text:storeId"></span>
+          <span data-bind="text:storeName"></span>
+        </li>
+        <li class="sale-detail-item sale-detail-time flex">
+          <span>时间：</span>
+
+          <p class="flex-1 dib" data-bind="foreach:workTime">
+            <span><!-- ko text:app.util.formatTimeMin(enterTime) --><!-- /ko -->-<!-- ko text:app.util.formatTimeMin(leaveTime) --><!-- /ko --></span><!-- ko if:$index() != $parent.workTime.length-1 -->
+            ,<!-- /ko -->
+          </p>
+        </li>
+        <li class="sale-detail-item sale-detail-task flex">
+          <p>工作任务：</p>
+          <p class="dib flex-1" data-bind="foreach:taskList">
+            <span data-bind="text:taskDesc"></span><!-- ko if:$index() != $parent.taskList.length-1 -->,<!-- /ko -->
+          </p>
+        </li>
+      </ul>
+      <ul class="mt20 pl20 pr20 bg-fff f28 color-333">
+        <li class="pt20 pb20 bbebebeb">
+          <span>品种数：<!-- ko text:prdList.length --><!-- /ko --></span>
+        </li>
+        <li class="flex pt20 pb20 bbd7d7d7">
+          <p class="flex-1">总支数：<!-- ko text:totalPrdNum --><!-- /ko --></p>
+
+          <p>总金额：&yen<!-- ko text:totalPrice/100 --><!-- /ko --></p>
+        </li>
+      </ul>
+
+      <!-- 产品循环 start -->
+      <ul class="sale-detail-list bg-fff" data-bind="foreach:prdList">
+        <li class="pt20 pb20">
+          <p class="color-666" data-bind="text:prdName"></p>
+          <p class="flex mt10">
+            <span class="flex-1">支数：<!-- ko text:prdNum --><!-- /ko --></span>
+            <span>&yen<!-- ko text:app.util.priceTransform(price*prdNum) --><!-- /ko --></span>
+          </p>
+        </li>
+      </ul>
+      <!-- 产品循环 end -->
+
+      <!-- 团购凭证 start -->
+      <ul class="mt20 mb20 pl20 pr20 bg-fff bbd7d7d7" data-bind="visible:fileList.length>0">
+        <li class="flex pt20 pb20" data-bind="visible:fileList.length>0,click:$parent.goToFileView">
+          <span class="flex-1">团购凭证</span>
+          <div class="flex">
+            <span class="flex-1 color-999">查看</span>
+
+            <div class="btn-more ml20"></div>
+          </div>
+        </li>
+        <li class="flex pt20 pb20 btebebeb" data-bind="visible:remark">
+          <span>备注：</span>
+          <span class="flex-1" data-bind="text:remark"></span>
+        </li>
+      </ul>
+      <!-- 团购凭证 end -->
+
+      <!-- 零销量原因 start -->
+      <div class="flex mt20 mb20 p20 bg-fff bbd7d7d7" data-bind="visible:noSalesReason">
+        <span>零销量原因：</span>
+
+        <p class="flex-1" data-bind="text:noSalesReason"></p>
+      </div>
+      <!-- 零销量原因 end -->
+    </article>
+  </div>
+  <!-- 内容 end-->
+</section>

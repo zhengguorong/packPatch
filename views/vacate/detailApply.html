@@ -1,0 +1,66 @@
+<section id="detailApplyPage">
+  <article class="flex p20 bg-fff bbd7d7d7">
+    <p class="flex-1">请假单号</p>
+    <p data-bind="text:$root.applyNo"></p>
+  </article>
+  <div class="tab flex bg-fff tc color-999 f28" data-bind="visible:vacateUsedList() != ''">
+    <div class="item-tab pt20 pb20 flex-1" data-bind="css:{'selected':leaveType()==='BACK_APPLY'},click:function(){leaveType('BACK_APPLY')}">
+      <p>销假</p>
+    </div>
+    <div class="item-tab pt20 pb20 flex-1" data-bind="css:{'selected':leaveType()==='LEAVE_APPLY'},click:function(){leaveType('LEAVE_APPLY')}">
+      <p>申请</p>
+    </div>
+  </div>
+  <!-- ko foreach:currentList -->
+    <article class="solid-bottom-d7d7d7 bg-fff mt20 mb20">
+      <div class="p20 f28 total clearfix">
+        <span class="fl">总时长</span>
+        <span class="fr color-666" data-bind="text:app.util.leaveHourShow(totalHour)">31天8小时</span>
+      </div>
+      <ul class="pr pr20 pl20 f28">
+        <span class="arrow pa" data-bind="visible:leaveList.length != 0"></span>
+        <!-- ko foreach:leaveList -->
+        <li class="clearfix pt20 pb20"><span class="fl" data-bind="text:leaveDesc">年假</span><span class="fr color-666" data-bind="text:app.util.leaveHourShow(hour)">31天8小时</span></li>
+        <!-- /ko -->
+      </ul>
+    </article>
+    <article class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+      <div class="f28">请假时间</div>
+      <div class="flex mt20">
+        <div class="flex-1 color-666" data-bind="text:app.util.formatDateTimeToHM(startDate)"></div>
+        <div class="tc">至</div>
+        <div class="flex-1 color-666 tr" data-bind="text:app.util.formatDateTimeToHM(endDate)"></div>
+      </div>
+    </article>
+    <article class="p20 solid-bottom-d7d7d7 bg-fff mb20">
+      <div class="f28">原因</div>
+      <div class="reason color-666" data-bind="text:reason">啊啊啊啊啊啊啊</div>
+    </article>
+    <!--请假证明-->
+    <article class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+      <div class="f28 clearfix" data-bind="click:$parent.goToFileView">
+        <span class="fl">
+          <!-- ko if:orderType==="LEAVE_APPLY" -->请假<!-- /ko --><!-- ko if:orderType==="BACK_APPLY" -->销假<!-- /ko -->证明
+        </span>
+        <span class="fr color-999">
+          <!-- ko if:fileList.length>0 -->
+          查看<img src="./images/icon/right.93c9afb7.png" class="ml20" style="width: 0.325rem" alt=""/>
+          <!-- /ko -->
+          <!-- ko ifnot:fileList.length>0 -->无<!-- /ko -->
+        </span>
+      </div>
+    </article>
+    <!--请假证明 end-->
+
+    <!--申请log-->
+    <article class="p20 solid-bottom-d7d7d7 bg-fff mb20 log color-999 f24" data-bind="foreach:history.reverse()">
+      <div class="pt20">
+        <span data-bind="text:processNode"></span>
+        <span class="ml10" data-bind="text:app.util.formatDateTime(operationDate)"></span>
+        <p data-bind="text:rejectReason,visible:rejectReason"></p>
+      </div>
+    </article>
+    <!--申请log end-->
+  <!-- /ko -->
+
+</section>

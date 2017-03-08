@@ -1,0 +1,17 @@
+<section id="targetListPage" class="f30">
+  <div class="column-add tc bbd7d7d7 bg-fff" data-bind="click:addTarget">
+    <img class="icon-target-add mr10" src="./images/icon/icon-target-add.bd35634f.png" />
+    <span class="vm color-1fb8ff">新增计划</span>
+  </div>
+  <article class="bg-fff">
+    <ul class="pl20 bbd7d7d7" data-bind="foreach:itemList">
+      <li class="item-target flex" data-bind="click:$root.editTarget">
+        <div class="flex-1">
+          <p class="color-333" data-bind="text:app.util.formatDate(planDate)">2016-09-01</p>
+          <p class="mt10 color-666" data-bind="text:normalName">门店名称门店名称门店名称门店名称门店名称门店名称门店名称</p>
+        </div>
+        <p class="btn-more ml30"></p>
+      </li>
+    </ul>
+  </article>
+</section>

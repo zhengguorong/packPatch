@@ -1,0 +1,11 @@
+<section id="newsPage">
+  <ul class="bg-fff" data-bind="foreach: messageList">
+    <li class="p20 bbd7d7d7">
+      <p class="color-666 f28" data-bind="text: msgContent">
+        我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯我收到消息咯
+      </p>
+      <p class="mt20 color-999 f24" data-bind="text: app.util.formatDateTime(pushTime)">2016-05-03 12:00:55</p>
+    </li>
+  </ul>
+  <p class="mt30 mb50 tc color-999 f30" data-bind="click: loadMore, visible: showLoadMore">点击加载更多...</p>
+</section>

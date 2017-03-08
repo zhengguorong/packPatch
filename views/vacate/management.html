@@ -1,0 +1,32 @@
+<section id="managementPage">
+  <header>
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <div class="contain-left pa ml20" onclick="app.util.goBack()">
+      </div>
+      <p class="title-header" data-bind="text:title"></p>
+      <div class="pa right top pr20" data-bind="click:goVacateApply"><img src="./images/icon/add-white.3a793336.png" style="width: 0.8rem; margin-top: -3px;" class="mr10" alt=""/>申请</div>
+    </div>
+  </header>
+  <!--本月尚未请假-->
+  <section class="noAttendance" data-bind="css:{none:leaveList().length!=0}">
+    <img src="./images/icon/attendance.35417f47.png" alt=""/>
+    <p class="f40 tc">本月尚未请假</p>
+  </section>
+  <!--本月尚未请假 end  -->
+    <!-- ko foreach:leaveList -->
+  <section class="bg-fff mb20 pt30 pl20 pr20 pb30 pr color-666 f28 solid-bottom-d7d7d7">
+    <div class="clearfix"  data-bind="click:$root.goPage" ><span class="fl"><!-- ko text:app.util.formatDateTimeToMD(startDate)--><!-- /ko --> - <!-- ko text:app.util.formatDateTimeToMD(endDate)--><!-- /ko --></span><span class="fr"><!-- ko text:app.util.leaveHourShow(hour) --><!-- /ko --></span></div>
+    <div class="mt20 mb20"  data-bind="click:$root.goPage" >
+        <!-- ko foreach:leaveList --><!-- ko text:leaveDesc --><!-- /ko --><!-- ko if:$index()+1<$parent.leaveList.length -->、<!-- /ko --><!-- /ko -->
+    </div>
+    <div class="color-1fb8ff" data-bind="click:$root.goPage,css:{'color-1fb8ff':status=='stay','color-ff6c47':status=='NotThrough','color-999':status=='complete'}"><!-- ko text:orderStatusShow --><!-- /ko --></div>
+    <div class="btn repeal pa right bottom mr20 tc" data-bind="css:{none:!recall||!(parseInt(startDate)-parseInt(new Date().getTime())>3600000)},click:$root.cancel">撤销</div>
+  </section>
+    <!-- /ko -->
+  <div style="width: 100%;height: 2.5rem"></div>
+  <div class="flex tc footer pt20 pb20 bg-fff f28 bottom">
+    <div class="flex-1 color-1fb8ff" data-bind="click:gotoPage.bind($data,'#/management')"><img src="./images/icon/thisMonth-blue.02bc7503.png" alt=""/>本月请假</div>
+    <div class="flex-1 color-999"  data-bind="click:gotoPage.bind($data,'#/vacateHistory')"><img src="./images/icon/history-grey.9c412d67.png" alt=""/>历史记录</div>
+  </div>
+
+</section>

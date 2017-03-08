@@ -1,0 +1,15 @@
+<section id="noticeListPage">
+  <ul data-bind="foreach: noticeList">
+    <li class="item-notice-list flex" data-bind="click: $root.goToNoticeDetail">
+      <div class="flex-1 w0">
+        <div class="flex">
+          <p class="label-unRead tc mr10" data-bind="visible: !isRead()">未读</p>
+          <div class="flex-1 w0 color-333 f30 ell" data-bind="text: infoTitle">月亮小屋3.2.1上线啦</div>
+        </div>
+        <p class=" mt20 color-999 f24" data-bind="text: app.util.formatDateTime(releaseTime())">2016-04-28 10:20:34</p>
+      </div>
+      <p class="btn-more"></p>
+    </li>
+  </ul>
+  <p class="mt30 tc color-999 f30" data-bind="click: loadMore, visible: showLoadMore">点击加载更多...</p>
+</section>

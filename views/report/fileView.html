@@ -1,0 +1,12 @@
+<section id="fileViewPage">
+  <article class="p20 clearfix" data-bind="foreach:fileList">
+    <div class="upload-item-box">
+      <div class="upload-item">
+        <img class="w h" data-bind="attr:{src:filePath},click:$parent.glass"/>
+      </div>
+    </div>
+  </article>
+  <div class="img-glass-cover pf top bottom left right" data-bind="visible:isGlass(),click:hideGlass">
+    <img class="img-glass" data-bind="attr:{src:selectedImg()}"/>
+  </div>
+</section>

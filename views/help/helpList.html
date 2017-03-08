@@ -1,0 +1,12 @@
+<section id="helpListPage" class="solid-bottom-d7d7d7">
+  <!-- ko foreach:helpList-->
+  <div class="bg-fff" data-bind="click: $parent.selectHelp,css:{selected: menuId == $parent.selectedHelp()}">
+    <p class="pl20 pr20 clearfix"><span data-bind="text:menuName">2. 常见问题</span><span class="arrow fr"></span></p>
+    <!-- ko if: menuId == $parent.selectedHelp() -->
+    <div class="subTitle bg-fff pl20 pr20" data-bind="foreach: leafList">
+      <div class=" solid-bottom-e5e5e5" data-bind="click: $root.clickSubHelp"><span class="color-1fb8ff">2.1</span><span data-bind="text:menuName">提报出错怎么办</span><img class="fr" src="./images/icon/right.93c9afb7.png" alt=""/></div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+</section>

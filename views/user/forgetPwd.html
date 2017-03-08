@@ -1,0 +1,21 @@
+<section id="forgetPwdPage">
+  <div class="pr mt30">
+    <input class="forget-input-column forget-account f28" type="tel" placeholder="请输入员工编号" data-bind="value:account,valueUpdate:'afterkeydown'"/>
+    <div class="btn-clear pa right top bottom vc ml30 mr20" data-bind="css:{none:!account()},click:cleanTxt.bind($data,account)"></div>
+  </div>
+  <div class="pr mt20">
+    <input class="forget-input-column forget-pwd f28" type="tel" placeholder="请输入手机号" data-bind="value:phone,valueUpdate:'afterkeydown'"/>
+    <div class="btn-clear pa right top bottom vc ml30 mr20" data-bind="css:{none:!phone()},click:cleanTxt.bind($data,phone)"></div>
+  </div>
+  <div class="flex mt30 ml20 color-999 f24">
+    <p>提示：</p>
+    <div class="flex-1">
+      <p>1.若不清楚员工编号，请询问对应上级；</p>
+      <p class="mt15">2.手机号码为人资系统中维护的手机号；</p>
+      <p class="mt15">3.若不清楚手机号，请联系对应区域人事；</p>
+    </div>
+  </div>
+  <div class="mt50 pl100 pr100">
+    <button class="btn w f30" data-bind="css:{'btn-confirm':account()||phone(),'btn-cancel':!(account()&&phone())},click:getVerifyCode,disable:!(account()&&phone())">获取验证码</button>
+  </div>
+</section>

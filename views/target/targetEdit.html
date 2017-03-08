@@ -1,0 +1,42 @@
+<section id="targetEditPage" class="f30 color-333">
+  <div class="pl20 bbd7d7d7 bg-fff">
+    <div class="column flex pl20 pr20 solid-bottom-e5e5e5">
+      <p><span>日期</span><i class="color-ff6c47">*</i></p>
+      <input class="db pr5 flex-1 border-none tr vm" type="text" placeholder="请选择" id="targetEditDate" data-bind="value: planDateView"/>
+      <p class="btn-more ml20"></p>
+    </div>
+    <div class="column flex pl20 pr20">
+      <p><span>门店</span><i class="color-ff6c47">*</i></p>
+      <select class="select-target db flex-1 border-none tr" style="background-color:#fff" data-bind="options: stores,
+                                                       optionsText: 'storeName',
+                                                       value: selectedStore,
+                                                       optionsCaption: '请选择',
+                                                       click: clickSelectStore,
+                                                       css:{'color-999':!selectedStore()}"></select>
+      <p class="btn-more ml20"></p>
+    </div>
+  </div>
+  <p class="p20 f28 color-666">说明：加微信人数指成交后扫描人寿标签人数</p>
+  <article class="bg-fff">
+    <ul class="list-target pl20 bbd7d7d7" data-bind="foreach: servTypeList">
+      <!-- ko if: $data && $data.length > 0 -->
+      <li class="item-target">
+        <p class="pt20 pb20 dashed-bottom-ebebeb"><span data-bind="text: app.util.formatTimeMin($data[0].startTime())">8:30</span>-<span  data-bind="text: app.util.formatTimeMin($data[0].endTime())">9:30</span></p>
+        <ul class="pt10 pb10 clearfix" data-bind="foreach: $data">
+          <li class="item-target-num fl">
+            <label class="label-target-num db fn">
+              <p class="ml20 mt10 mb10 pa color-666" data-bind="text: serviceDesc">服务人数</p>
+              <input class="tl" type="tel" placeholder="请输入" data-bind="value: serviceNum"/>
+            </label>
+          </li>
+        </ul>
+      </li>
+      <!-- /ko -->
+    </ul>
+  </article>
+  <div class="p20 mb10 flex">
+    <button class="db flex-1 mr10 btn btn-confirm-hollow" data-bind="visible: !planId(), click: cancelSfaPlanServInfo">取 消</button>
+    <button class="db flex-1 mr10 btn btn-confirm-hollow" data-bind="visible: planId, click: cancelSfaPlanServInfo">删除计划</button>
+    <button class="db flex-1 ml10 btn btn-confirm" data-bind="click: saveSfaPlanServInfo">提 交</button>
+  </div>
+</section>

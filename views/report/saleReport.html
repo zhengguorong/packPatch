@@ -1,0 +1,55 @@
+<section id="saleReportPage">
+  <nav class="nav-time flex pl20 pr20 f28 color-999" data-bind="visible:type() == 'date'">
+    <div class="time-parent pl20 pr20 f28" data-bind="text:selectedMonth"></div>
+    <ul class="time-list flex-1 ova text-nowrap" id="saleReportTime" data-bind="foreach:timeList">
+      <li class="time-item" data-bind="click:$parent.TimeSelect,css:{active:$parent.selectedTimeStamp()==timeStamp()}"><!-- ko text:date --><!-- /ko --><!-- ko if:$parent.selectedTimeStamp()==timeStamp() -->日<!-- /ko --></li>
+    </ul>
+  </nav>
+  <nav class="nav-time flex pl20 pr20 f28 color-999" data-bind="visible:type() == 'month'">
+    <div class="time-parent pl20 pr20 f28" data-bind="text:selectedYear"></div>
+    <ul class="time-list flex-1 ova text-nowrap" id="saleReportMonth" data-bind="foreach:timeList">
+      <li class="time-item" data-bind="click:$parent.MonthSelect,css:{active:$parent.selectedMonthStamp()==timeStamp()}"><!-- ko text:month --><!-- /ko --><!-- ko if:$parent.selectedMonthStamp()==timeStamp() -->月<!-- /ko --></li>
+    </ul>
+  </nav>
+  <article class="p20 bg-d7f8ff bbd7d7d7" data-bind="visible:totalDate() && selectedDate()">
+    <p class="f28 color-333" data-bind="visible:selectedDate()"><!-- ko text:selectedDate --><!-- /ko --><span data-bind="visible:isRest() != 'TODAY_REST'">总计</span><span data-bind="visible:isRest() == 'TODAY_REST'">休息</span></p>
+    <ul class="list-progress flex-1" data-bind="foreach:totalDate">
+      <li class="flex mt20 mb20" >
+        <div class="flex-1 mr5">
+          <div class="flex f24">
+            <p class="flex-1" data-bind="text:totalName"></p>
+            <p>实际<span class="ml10" data-bind="text:actuTotal"></span></p>
+          </div>
+          <div class="bar-progress mt10 mb10">
+            <div class="progress-item setTransform" data-bind="style:{width:compRateNo>100 ? '100%' : compRate}"></div>
+          </div>
+          <p class="tr f24 color-999">计划<span class="ml10" data-bind="text:planTotal"></span></p>
+        </div>
+        <span class="label-compRate ml20 pt25 pb25 pr10 mr20 tr f30" data-bind="text:compRateNo>999 ? '>999%' : compRate"></span>
+      </li>
+    </ul>
+  </article>
+  <div data-bind="foreach:storeDate">
+    <article class="mt20 p20 bg-fff bbd7d7d7" data-bind="click:$root.goToDetail,visible:storeId && ($parent.currentReport()==='date'?validFlag=='VALID_PLAN':true)">
+      <p class="f28 color-333" data-bind="text:storeName"></p>
+      <div class="flex">
+        <ul class="list-progress flex-1" data-bind="foreach:total">
+          <li class="flex mt20 mb20">
+            <div class="flex-1 mr5">
+              <div class="flex f24">
+                <p class="flex-1" data-bind="text:totalName"></p>
+                <p data-bind="text:actuTotal"></p>
+              </div>
+              <div class="bar-progress mt10 mb10">
+                <div class="progress-item setTransform" data-bind="style:{width:compRateNo>100 ? '100%' : compRate}"></div>
+              </div>
+              <p class="tr f24 color-999" data-bind="text:planTotal"></p>
+            </div>
+            <span class="label-compRate ml10 pt25 pb25 mr10 tr f30" data-bind="text:compRateNo>999 ? '>999%' : compRate"></span>
+          </li>
+        </ul>
+        <div class="btn-more pr20" data-bind="css:{hidden:$root.type() == 'month'}"></div>
+      </div>
+    </article>
+  </div>
+</section>

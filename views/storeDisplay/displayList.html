@@ -1,0 +1,58 @@
+<section id="displayListPage" class="pr">
+  <header>
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <div class="contain-left pa ml20" onclick="app.util.goBack()">
+      </div>
+      <p class="title-header" data-bind="text:title"></p>
+      <div class="pa right top pr20" data-bind="click:seachDisplay"><img src="./images/icon/icon-search.389a114c.png" style="width: 1.1rem; margin-top: -3px;" class="mr10" alt=""/></div>
+    </div>
+  </header>
+  <article class="contain-search ova">
+    <!-- 搜索框部分 点击搜索后才显示 -->
+    <div class="column-search flex p20 bg-fff bbd7d7d7 f30" data-bind="css:{none:seachVis}">
+      <input class="input-search flex-1 f30" data-bind="value:storeName" placeholder="输入门店名称" />
+      <p class="color-1fb8ff" data-bind="click:getStoreDisplay">搜索</p>
+    </div>
+    <!-- 列表 -->
+    <div data-bind="foreach:displayList">
+      <div class="item-display pl20 pr20 pt30 pb30 bg-fff f28 color-333">
+        <div data-bind="click:$root.gotoDisplayDetail">
+          <div class="flex f30">
+            <p class="flex-1" data-bind="text:planId">C-00032736</p>
+            <p class="color-1fb8ff" data-bind="text:status().statusText">未执行1</p>
+            <p class="btn-more blue ml15"></p>
+          </div>
+          <p class="mt20 pb30 f30 solid-bottom-e5e5e5" data-bind="text:storeName">上海-家乐福-XXX店</p>
+        </div>
+        <p class="mt30 color-999"><!-- ko text:tpmItemDesc--><!-- /ko --><!-- ko if:displayLocation()-->,<!-- /ko --><!-- ko text:displayLocation--><!-- /ko --></p>
+        <div class="flex mt20 color-999">
+          <p class="flex-1">协议时间:<span><!-- ko text:app.util.formatYYMMdd(protocolStartTime()) --><!-- /ko --><!-- ko if:protocolStartTime()!=0 -->-<!-- /ko --><!-- ko text:app.util.formatYYMMdd(protocolEndTime()) --><!-- /ko --></span></p>
+          <p class="line-unl" data-bind="css:{none:(!status().displayDataShow || decorationDate()!=0) || !signRenovationB(),'color-1fb8ff':status().displayDataCss},click:$root.seachDateDisplay.bind($data,status().displayDataCss)">完成装修日期</p>
+        </div>
+        <div class="flex mt20" data-bind="css:{none:status().status == 'E0070'}">
+          <div class="flex-1">
+            <p>执行开始：<!-- ko text:executeStartTime()==0?'':app.util.formatDate(executeStartTime()) --><!-- /ko --></p>
+            <p class="mt20">执行结束：<!-- ko text:executeEndTime()==0?'':app.util.formatDate(executeEndTime()) --><!-- /ko --></p>
+          </div>
+          <p>
+            <button class="btn btn-confirm mt15 f30" data-bind="css:{none:status().btnText=='','btn-cancel':!couldHandle()},text:status().btnText,click:$root.intoForce,disable:!couldHandle()">开始执行</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+  <div class="column-search flex pa p20 bg-fff bbd7d7d7 f30" data-bind="css:{none:seachVis}">
+    <input class="input-search flex-1 f30" data-bind="value:storeName" placeholder="输入门店名称" />
+    <p class="color-1fb8ff" data-bind="click:getStoreDisplay">搜索</p>
+  </div>
+  <div class="column-decorate pa top bottom left right bg-fff" data-bind="css:{none:seachDateVis},click:seachDateDisplay">
+    <div class="container-decorate bg-fff f30 color-333" data-bind="click:function(){return},clickBubble: false">
+      <p>装修完成日期</p>
+      <input class="w pl15 f30" id="input-decorate" placeholder="年-月-日"/>
+      <div class="flex">
+        <button class="btn btn-blue-hollow flex-1 db f30" data-bind="click:seachDateDisplay">取 消</button>
+        <button class="btn btn-blue flex-1 db ml20 f30" data-bind="click:seachDate">确 定</button>
+      </div>
+    </div>
+  </div>
+</section>

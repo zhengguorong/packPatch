@@ -1,0 +1,39 @@
+<section id="periodAddPage" class="color-333 f30">
+  <header id="header">
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <div class="contain-left pa ml20" onclick="app.util.goBack()">
+        <span class="f28"></span>
+      </div>
+      <p class="title-header" data-bind="text:title"></p>
+      <div class="pa right top pr20" data-bind="click:fresh">
+        <span class="f28 color-fff">刷新</span>
+      </div>
+    </div>
+  </header>
+  <article id="periodAddArticle" data-bind="foreach:itemList">
+    <div class="mb20 pl20 bg-fff bbd7d7d7">
+      <p class="column-item bbd7d7d7"><span class="mr10" data-bind="text:app.util.formatDate($root.dateTime())">2016-09-10</span><span data-bind="text:app.util.getDay($root.dateTime())">周六</span></p>
+      <div class="column-remark" data-bind="text:$root.periodStore().storeName">发货的数据看回复空间撒后方可街道上电话开始发货的数据看回复空间撒后方可街道上电话开始</div>
+    </div>
+    <div class="column-period mb20 pl10 pr10 bg-fff bbd7d7d7">
+      <p class="pt20 pb20 pl10">时间段</p>
+      <!--<select class="db flex-1 border-none tr" data-bind="options:serviceList,optionsText:'serviceTime',value:selectedService,optionsCaption:'请选择时间段'"></select>-->
+      <ul class="list-time pb20 ovh" data-bind="foreach:serviceList">
+        <li class="item-time fl p10" data-bind="css:{'active':$root.selectedService() == itemNo},click:$root.selectServiceTime">
+          <p class="sub-item-time pt10 pb10" data-bind="text:serviceTime">7:30-8:30</p>
+        </li>
+      </ul>
+    </div>
+    <ul class="pl20 bg-fff bbd7d7d7" data-bind="foreach:$root.typeList">
+      <li class="column-item flex ovh" data-bind="css:{'solid-bottom-e5e5e5':$index() != $parent.typeList.length - 1}">
+        <p data-bind="text:serviceDesc">服务人数</p>
+        <input class="db flex-1 mb5 pr30 tr border-none" placeholder="请输入" type="tel" maxlength="5" data-bind="value:serviceNum,attr:{id:'periodAdd-'+serviceType()},click:$root.inputReSet"/>
+      </li>
+    </ul>
+    <p class="p20 f28 color-999">说明：加微信数指成交后扫描人寿标签人数</p>
+  </article>
+  <div id="footer-period" class="pl20 pr20 pb30 flex">
+    <button class="db flex-1 mr10 btn btn-confirm-hollow" data-bind="click:cancel">取 消</button>
+    <button class="db flex-1 ml10 btn btn-confirm" data-bind="click:save">保 存</button>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<section id="resetPwdPage">
+  <ul class="mt5">
+    <li class="flex pr mt30 pl20 pt10 pb10 pr20 bg-fff f28">
+      <p class="change-tap color-333">验证码</p>
+      <input class="change-input db flex-1 pl20" type="text" placeholder="请输入验证码" data-bind="value:verifyCode,valueUpdate:'afterkeydown'"/>
+      <button class="btn btn-verify" data-bind="disable:codeBtnStatus, click:getVerifyCode, text:codeBtnText ,css:{'btn-commit':!codeBtnStatus(),'btn-cancel':codeBtnStatus()}"></button>
+      <div class="btn-clear pa right top bottom vc mr20" style="right: 4.5rem;" data-bind="css:{none:!verifyCode()},click:cleanTxt.bind($data,verifyCode)"></div>
+    </li>
+    <li class="flex pr mt20 pl20 pt10 pb10 pr20 bg-fff f28">
+      <p class="change-tap color-333">新密码</p>
+      <input class="change-input db flex-1 pl20" type="password" placeholder="请输入8-18位数字和字母密码" data-bind="value:pwd,valueUpdate:'afterkeydown'" maxlength="18"/>
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="css:{none:!pwd()},click:cleanTxt.bind($data,pwd)"></div>
+    </li>
+    <li class="flex pr mt20 pl20 pt10 pb10 pr20 bg-fff f28">
+      <p class="change-tap color-333">确认密码</p>
+      <input class="change-input db flex-1 pl20" type="password" placeholder="请再次输入密码" data-bind="value:rePwd,valueUpdate:'afterkeydown'" maxlength="18"/>
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="css:{none:!rePwd()},click:cleanTxt.bind($data,rePwd)"></div>
+    </li>
+  </ul>
+  <div class="mt50 pl100 pr100">
+    <button class="btn w f30" data-bind="disable:!(verifyCode()&&pwd()&&rePwd()),css:{'btn-confirm':verifyCode()||pwd()||rePwd(),'btn-cancel':!(verifyCode()&&pwd()&&rePwd())},click:commitReset">提交</button>
+  </div>
+</section>

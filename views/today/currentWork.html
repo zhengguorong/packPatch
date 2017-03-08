@@ -1,0 +1,71 @@
+<section id="currentWorkPage">
+  <button class="none">今日休息</button>
+    <article class="p20 bg-d7f8ff bbd7d7d7" >
+        <div class="flex bb8fdbff" data-bind="click:gotoTodayPlan">
+            <ul class="list-progress flex-1" data-bind="foreach:currentWorkList">
+                <li class="flex mt20 mb20" >
+                    <div class="flex-1">
+                        <div class="flex f24">
+                            <p class="flex-1" data-bind="text:totalName"></p>
+                            <p class="mr10">实际</p>
+                            <p data-bind="text:actuTotal"></p>
+                        </div>
+                        <div class="bar-progress mt10 mb10">
+                            <div class="progress-item setTransform" data-bind="style:{width:(compRateNo>=100)?'100%':compRateNo+'%'}"></div>
+                        </div>
+                        <p class="tr f24 color-999">计划<span class="ml10" data-bind="text:planTotal"></span></p>
+                    </div>
+                    <div class="item-compRate"><p class="dtc vm"><span class="label-compRate dib ml20 pr30 f30 tr text-brake" data-bind="text:compRate"></span></p></div>
+                </li>
+            </ul>
+            <div class="btn-more blue pr20"></div>
+        </div>
+        <div class="pt20 tr">
+            <button class="btn btn-submit-hollow btn-today f24" data-bind="click:restBtn,css:{'btn-cancel':countTotal()!=0 || isRestLoad()},disable:countTotal()!=0 || isRestLoad()"><!--ko text:validFlagToday()=='TODAY_REST'?'取消休息':'今日休息'--><!-- /ko --></button>
+            <button class="btn btn-submit-hollow btn-today ml20 f24" data-bind="css:{'btn-cancel':(validFlagToday()=='TODAY_REST'||currentWorkInfoList().length>=5)},disable:(validFlagToday()=='TODAY_REST'||currentWorkInfoList().length>=5),click:gotoWorkPlan">新增计划</button>
+        </div>
+    </article>
+    <div data-bind="foreach:currentWorkInfoList">
+        <article class="mt20 p20 bg-fff bbd7d7d7" >
+            <p class="f28 color-333 ell" data-bind="text:storeName"></p>
+            <div class="flex">
+                <ul class="list-progress flex-1" data-bind="foreach:total">
+                    <li class="flex mt20 mb20">
+                        <div class="flex-1">
+                            <div class="flex f24">
+                                <p class="flex-1" data-bind="text:totalName"></p>
+                                <p data-bind="text:actuTotal"></p>
+                            </div>
+                            <div class="bar-progress mt10 mb10">
+                                <div class="progress-item setTransform" data-bind="style:{width:(compRateNo>=100)?'100%':compRateNo+'%'},css:{none:$parent.validFlag()=='NOT_ENTER_STORE'}"></div>
+                            </div>
+
+                            <p class="tr f24 color-999" data-bind="text:planTotal"></p>
+
+                        </div>
+                        <div class="item-compRate"><p class="dtc vm"><span class="label-compRate dib ml20 pr30 f30 tr text-brake" data-bind="text:compRate"></span></p></div>
+                    </li>
+                </ul>
+                <!-- 进店离店操作按钮块 start -->
+                <div class="pt5">
+                    <button class="btn btn-confirm btn-check mt30 mb50 f30 " data-bind="disable:(validFlag()!='VALID_PLAN'||$root.isIntoStore()),css: {none:(status()!='LEAVE_STORE'&&status()),'btn-cancel':validFlag()!='VALID_PLAN'||$root.isIntoStore()},click:$root.come" >进店</button>
+                    <button class="btn btn-confirm btn-check mt30 mb50 f30" data-bind="css: {none:(status()!='ENTER_STORE'),'btn-cancel':validFlag()!='VALID_PLAN'},click:$root.gotoPunchCard">离店</button>
+                    <button class="btn btn-confirm btn-check f30" data-bind="css: {none:count()===0,'btn-cancel':validFlag()!='VALID_PLAN'},click:$root.gotoSalesQuantity">提报销量</button>
+
+                </div>
+                <!-- 进店离店操作按钮块 end -->
+            </div>
+            <!-- 进店离店时间 start -->
+            <div class="pt20 pb20 f24 color-999" data-bind="css: {none:count()==0}">
+                <p>进店：<!--ko text:enterTimeStr--><!-- /ko --></p>
+                <p>离店：<!--ko text:leaveTimeStr--><!-- /ko --></p>
+            </div>
+            <!-- 进店离店时间 end -->
+            <div class="f24 color-999" data-bind="css: {none:count()!=0}">
+                <button class="btn-checkbox vm" data-bind="css:{'btn-checkbox-active':validFlag()=='NOT_ENTER_STORE'&&$root.validFlagToday()!='TODAY_REST','btn-checkbox-disabled':(validFlag()=='TODAY_REST'||$root.validFlagToday()=='TODAY_REST')},click:$root.rest,disable:$root.validFlagToday()=='TODAY_REST'"></button>
+                <span class="label-rest vm fn">今日不进店</span>
+                </label>
+            </div>
+        </article>
+    </div>
+</section>

@@ -1,0 +1,44 @@
+<section id="addBrandPage" class="pb100 pr">
+  <div class="h ova">
+    <div class="pl20 mb20 bg-fff bbd7d7d7" data-bind="visible:defaultBrandList().length>0">
+      <p class="solid-bottom-e5e5e5">
+        <label class="fn"><input class="radio-brand vm" type="radio" name="brand" value="true" data-bind="checked:isDefault" /><span class="dib vm f28 color-666 lh100">选择品牌</span></label>
+      </p>
+      <ul class="list-brand" data-bind="foreach:defaultBrandList">
+        <li class="dib">
+          <label class="pr dib fn">
+            <input type="checkbox" class="checkbox pa top bottom left right opa w h" data-bind="value:$data,disable:$root.isDefault()!=='true',checked:$root.defaultList" />
+            <span class="item" data-bind="text:thirdBrandDesc">立白</span>
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div class="bg-fff bbd7d7d7 mb100 ovh">
+      <div class="flex pl20" style="line-height: 2.2rem;">
+        <label class="db flex-1 fn"><input class="radio-brand vm" type="radio" name="brand" value="false" data-bind="checked:isDefault"  /><span class="dib vm f28 color-666 lvmh100">自定义品牌</span></label>
+        <p>
+          <button class="btn-add mr50 f28 vm lh100 color-999 boxb" data-bind="click:addCustomBrand,disable:$root.isDefault()!=='false',css:{'active':isDefault()=='false'}">添加</button>
+          <span class="column-del mr20 f28 vm color-999" data-bind="click:delTab,visible:customList().length>0,text:isDeleted()?'完成':'删除',css:{'color-00baff':isDefault()=='false'}"></span>
+        </p>
+      </div>
+      <ul class="list-edit solid-top-e5e5e5" data-bind="foreach:customList,visible:customList().length>0,css:{'del':isDeleted()}">
+        <li class="item-edit pr pl20 pr20">
+          <textarea class="w50 pa" type="text"  data-bind="value:thirdBrandDesc,valueUpdate:'afterkeydown'" maxlength="20" placeholder="请填写品牌名称"></textarea>
+          <span class="input-brand dib w50  f28"></span><!--
+      --><div class="w50 pt30 pb30 dib vm">
+            <p class="mb20 color-666 tr">
+              <input class="input-edit f28" placeholder="填写数量" type="tel" data-bind="value:sumNumber,valueUpdate:'afterkeydown'"/>件
+            </p>
+            <p class="mt5 color-666 tr">
+              <input class="input-edit f28" placeholder="填写金额" type="text" data-bind="value:sumMoney,valueUpdate:'afterkeydown'"/>元
+            </p>
+          </div>
+          <p class="btn-del" data-bind="click:$root.delCustomBrand"><span class="label-del f28">删 除</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="pa bottom left right bg-F1F1F1">
+    <buttom class="btn btn-confirm boxb f34" data-bind="click:save">确 定</buttom>
+  </div>
+</section>

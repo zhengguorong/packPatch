@@ -1,0 +1,42 @@
+<section id="punchCardPage">
+  <div class="pl20 pr20">
+    <div class="info flex">
+      <p class="flex-1 color-999 f24">进店信息</p>
+      <p class="f24 color-4ab6e8" data-bind="click:loadAddress ,css:{none:status()!='LEAVE_STORE'}"><img class="icon-refresh" src="./images/icon/refresh.c0292f7b.png" />重新定位</p>
+    </div>
+    <article class="column-push bg-fff color-333" data-bind="css:{punched:status()!='LEAVE_STORE'&&status()}">
+      <p class="punch-time f30">
+        <span data-bind="text:app.util.formatDate(come().workTime())+' '+app.util.formatTimeMin(come().workTime())"></span>
+        <span class="ml10" data-bind="css:{none:status()=='LEAVE_STORE'}">进店</span>
+      </p>
+      <p class="punch-position mt30 f30"  data-bind="css:{none:come().isLoading(),'color-ff6c47':(status()=='LEAVE_STORE'&&!isHide())},text:come().gpsAddress()==''?'定位失败':come().gpsAddress()"></p>
+      <p class="punch-position mt30 f30 color-ff6c47" data-bind="css:{none:!come().isLoading()}"><img style="height: .7rem" src="images/loading.0e6e0f46.gif"></p>
+    </article>
+    <div class="info flex mt20" data-bind="css:{none:status()=='LEAVE_STORE'}">
+      <p class="flex-1 color-999 f24">离店信息</p>
+      <p class="f24 color-4ab6e8" data-bind="click:loadAddress"><img class="icon-refresh" src="./images/icon/refresh.c0292f7b.png" />重新定位</p>
+    </div>
+    <article class="column-push bg-fff bbd7d7d7 color-333" data-bind="css:{none:status()=='LEAVE_STORE'}">
+      <div class="punch-time f30" data-bind="text:app.util.formatDate(out().workTime())+' '+app.util.formatTimeMin(out().workTime())"></div>
+      <p class="punch-position mt30 f30"  data-bind="css:{none:out().isLoading(),'color-ff6c47':(status()=='ENTER_STORE'&&!isHide())},text:out().gpsAddress()==''?'定位失败':out().gpsAddress()"></p>
+      <p class="punch-position mt30 f30 color-ff6c47" data-bind="css:{none:!out().isLoading()}"><img style="height: .7rem" src="images/loading.0e6e0f46.gif"></p>
+    </article>
+    <!--<article class="mb20 p20 bg-fff bbd7d7d7 color-333" data-bind="css:{none:!isHide()}">-->
+    <!--<div class="punch-time pt20 pb20 f28" data-bind="text:time" ></div>-->
+    <!--<p class="punch-position pt20 pb20 f28 color-ff6c47">定位失败</p>-->
+    <!--</article>-->
+  </div>
+  <div class="pt20 mt20" data-bind="css:{none:status()!='LEAVE_STORE'}">
+    <p class="pl20 pr20 f24 color-999">班次选择</p>
+    <div class="list-type ovh" data-bind="foreach: classList">
+      <div class="item-type fl">
+        <p class="item-sub" data-bind="text: fieldDesc,css:{active:$root.classId()==fieldCode},click:$root.selectClass" ></p>
+      </div>
+    </div>
+  </div>
+    <div class="pf bottom w flex mb30 pl10 pr10">
+        <button class="btn btn-confirm-hollow db flex-1 m10 pt15 pb15 f30" data-bind="click:cancel">取 消</button>
+        <button class="btn btn-confirm db flex-1 m10 pt15 pb15 f30" data-bind="disable:isSuccess,css:{none:(status()=='LEAVE_STORE')},click:savePunchInfo">离 店</button>
+        <button class="btn btn-confirm db flex-1 m10 pt15 pb15 f30" data-bind="disable:isSuccess,css:{none:(status()=='ENTER_STORE')},click:savePunchInfo"  >进 店</button>
+    </div>
+</section>

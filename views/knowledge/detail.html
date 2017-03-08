@@ -1,0 +1,30 @@
+<section class="bg-fff pr" id="knowledgeDetailPage">
+  <header id="header">
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <div class="contain-left pa ml20" data-bind="click:goBack">
+      </div>
+      <p class="title-header">文档详情</p>
+      <div class="contain-right pa top right" style="font-size: 0;" data-bind="click: collectPaper">
+        <!-- ko if: isCollect -->
+        <img class="icon-collect vm mr10" src="./images/icon/collect-white@2x.97ace49c.png"/>
+        <span class="vm f28">已收藏</span>
+        <!-- /ko -->
+
+        <!-- ko if: !isCollect() -->
+        <img class="icon-collect vm mr10" src="./images/icon/collect-hollow@2x.78a669ff.png"/>
+        <span class="vm f28">收藏</span>
+        <!-- /ko -->
+      </div>
+    </div>
+  </header>
+  <article class="column-article p30">
+    <div class="f34 color-333" data-bind="text: paperTitle">标题标题标题标题标题</div>
+    <p class="mt20 mb30 f24 color-999">发布日期：<span data-bind="text: app.util.formatDateTime(releaseTime())">2016-04-03 12:00:00</span></p>
+    <div class="f28 color-666" data-bind="html: paperContent">
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    </div>
+  </article>
+  <article class="pa bottom left right" style="top:44px;" data-bind="visible:iframeSrc">
+    <iframe class="w h border-none" id="frame-link" name="frame-link" data-bind="attr:{src:iframeSrc}"></iframe>
+  </article>
+</section>

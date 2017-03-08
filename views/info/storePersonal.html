@@ -1,0 +1,30 @@
+<section id="storePersonalPage">
+  <div class="pl20 bg-fff f30 bbd7d7d7">
+    <p class="column pr20 solid-bottom-e5e5e5"><!-- ko text:storeId --><!-- /ko --> <!-- ko text:storeName --><!-- /ko --></p>
+    <div class="column pr20 flex">
+      <p class="flex-1">当前驻店</p>
+      <p class="color-1fb8ff" ><!-- ko text:hasBpNum --><!-- /ko -->人</p>
+    </div>
+  </div>
+  <ul class="mt20 f30" data-bind="foreach:userList" >
+    <li class="item" >
+      <div class="pt30 pb30 solid-bottom-e5e5e5">
+        <div class="flex">
+          <p class="number flex-1" data-bind="css:{'color-999':data.relStauts=='FEATURE','color-1fb8ff':data.relStauts!='FEATURE','invalid':data.relStauts=='FEATURE'}"><!-- ko text:data.userName --><!-- /ko --><span class="f20 ml20 vb color-999" data-bind="text:data.statusDesc"></span></p>
+          <p class="btn-open mr20" data-bind="click:$root.showChange,css: {active: !show()}"></p>
+        </div>
+        <p class="info f24" data-bind="css: {none:show()}"><span data-bind="text:data.userId">80382948</span><span> <!-- ko text:data.positionDesc --><!-- /ko --></span></p>
+      </div>
+      <ul class="bbd7d7d7" data-bind="foreach:data.dateList">
+        <li class="sub-item flex " >
+          <p class="column flex-1">
+            <span data-bind="text:app.util.formatDate(dateFrom)">2017/01/01</span>-
+            <span data-bind="text:app.util.formatDate(dateTo)">2017/01/09</span>
+            <span class="ml30 color-666" data-bind="text:taskDesc">促销</span>
+          </p>
+          <p class="btn-edit mr20" data-bind="click:$root.goRelation.bind(this,$parent)"></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>

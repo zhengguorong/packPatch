@@ -1,0 +1,38 @@
+<section id="addStoreRelationPage">
+  <div class="column flex bbd7d7d7">
+    <p class="icon"></p>
+    <div class="flex-1 pb30">
+      <p class="f30 column-text"><!-- ko text:userInfo().userId --><!-- /ko --> <!-- ko text:userInfo().userName --><!-- /ko --></p>
+      <p class="mt20 color-999 f24"><!-- ko text:userInfo().department --><!-- /ko --> <!-- ko text:userInfo().positionDesc --><!-- /ko --></p>
+    </div>
+  </div>
+  <div class="column mt20 flex bbd7d7d7">
+    <p class="icon icon-address"></p>
+    <p class="vt column-text" data-bind="css:{none:selectedShop().storeName}">门店</p>
+    <div class="flex-1 pb20 pr20  db" data-bind="click:gotoSelectShop" ><span class="vt column-text fr" data-bind="text:selectedShop().storeName?selectedShop().storeId + ' ' + selectedShop().storeName :'请选择门店',css:{'color-999':!selectedShop().storeName}"></span></div>
+  </div>
+  <div class="column mt20 flex column-text">
+    <p class="icon icon-time"></p>
+    <div class="solid-bottom-e5e5e5 flex-1 flex">
+      <p class="flex-1 pb20">关系开始日期</p>
+      <input class="column-date border-none column-text color-666" id="starDate" type="text" data-bind="value:dateFrom" placeholder="请选择日期"/>
+    </div>
+  </div>
+  <div class="column flex bbd7d7d7 column-text">
+    <p class="icon icon-none"></p>
+    <p class="flex-1 pb20">关系结束日期</p>
+    <input class="column-date border-none column-text color-666" type="text" id="endDate" data-bind="value:dateTo" placeholder="请选择日期"/>
+  </div>
+  <div class="column mt20 flex bbd7d7d7">
+    <p class="icon icon-task"></p>
+    <div class="flex-1">
+      <p class="column-text">工作内容</p>
+      <div class="pt20 pb30 clearfix" data-bind="foreach:taskList">
+        <p class="item-task" data-bind="text:taskDesc,click:$root.selectTask,css:{'active':$root.selectedTask()==$data}">提报</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt30 pl20 pr20 pb30 flex">
+    <button class="btn db btn-confirm flex-1 f30" data-bind="click:save">保 存</button>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<section class="pr" id="vacateHistoryPage">
+  <header>
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <div class="contain-left pa ml20" onclick="app.util.goBack()">
+      </div>
+      <p class="title-header" data-bind="text:title"></p>
+      <div class="pa right top pr20" data-bind="click:filter"><img src="./images/icon/filter.5788ea73.png" style="width: 0.8rem; margin-top: -3px;" class="mr10" alt=""/>筛选</div>
+    </div>
+  </header>
+
+  <div class="clearfix p20 summary color-fff f28" data-bind="visible:!showInit()">
+    <span class="fl"><!-- ko text:startMonth --><!-- /ko --> 至 <!-- ko text:endMonth --><!-- /ko --></span>
+    <span class="fr">共<!-- ko text:totalLength --><!-- /ko -->条</span>
+  </div>
+  <!-- list start -->
+  <div class="list" data-bind="foreach:totalItemList">
+    <div class="tc color-999" style="height: 1.25rem;line-height: 1.25rem" data-bind="visible:year"><!-- ko text:year --><!-- /ko -->年</div>
+    <!-- ko foreach:itemList -->
+    <article class="item-history bg-fff pt30 pl20 pr20 pb30 pr color-666 f28" data-bind="click:$root.goDetails" >
+      <div class="clearfix color-333"><span class="fl"><span data-bind="text:app.util.formatDateTimeToMD(startDate())"></span> - <span data-bind="text:app.util.formatDateTimeToMD(endDate())"></span></span><span class="fr" data-bind="text:hourText"></span></div>
+      <div class="mt20 mb20 color-333" data-bind="foreach:leaveList"><span data-bind="text:leaveDesc"></span><span data-bind="visible:$parent.leaveList().length>$index()+1">、</span></div>
+      <div class="color-999 clearfix"><span class="fl" data-bind="text:orderStatus"></span><span class="fr"><img src="./images/icon/right.93c9afb7.png" style="width:0.325rem" alt=""/></span></div>
+    </article>
+    <!-- /ko -->
+  </div>
+  <!-- list end -->
+
+  <!--暂无记录 start-->
+  <article class="noAttendance" data-bind="visible:noRecord">
+    <img src="./images/icon/noHistory.78b31546.png" alt=""/>
+    <p class="f40 tc">暂无记录</p>
+  </article>
+  <!--暂无记录 end-->
+
+  <div style="width: 100%;height: 2.5rem"></div>
+  <div class="flex tc footer pt20 pb20 bg-fff f28 bottom">
+    <div class="flex-1 color-999" data-bind="click:clickApply"><img src="./images/icon/thisMonth-gray.1010e4bc.png" alt=""/>本月请假</div>
+    <div class="flex-1 color-1fb8ff"><img src="./images/icon/history-blue.47563805.png" alt=""/>历史记录</div>
+  </div>
+
+  <!--筛选-->
+  <article class="filter left right  bottom" data-bind="visible:!notInit()">
+    <div class="pa top left right bottom" data-bind="click:hideTimePicker"></div>
+    <div class="pa top left right p20 bg-fff f30">
+      <div class="pb20 flex"><span class="color-666 pr20 tag">从</span><div class="flex-1"><input class="w tc color-ff6c47" id="historyStartMonth" data-bind="value:startMonth" placeholder="请选择月份" type="text"/></div></div>
+      <div class="flex"><span class="color-666 pr20 tag">到</span><div class="flex-1"><input class="w tc color-ff6c47" id="historyEndMonth" data-bind="value:endMonth" placeholder="请选择月份"  type="text"/></div></div>
+      <div class="flex mt20 pt20">
+        <div class="flex-1">
+          <div class="w btn mr10 color-1fb8ff bg-fff f30" data-bind="click:reset,clickBubble:false">重 置</div>
+        </div>
+        <div class="flex-1">
+          <div class="w btn ml10 bg-1fb8ff f30" style="color:#fff;" data-bind="click:goFilter">确 定</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!--筛选end-->
+</section>

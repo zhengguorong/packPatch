@@ -1,0 +1,61 @@
+<section id="vacateApplyPage">
+  <section class="pt20 solid-bottom-d7d7d7 bg-fff mb20 ">
+    <div class="f28 tc color-666 pr20 btnGroup clearfix" data-bind="foreach: vacateTypes">
+      <div><div class="btn selected" data-bind="text: fieldDesc, css: {selected: $root.vacateTypeIsExist($data) >= 0}, click: $root.selectVacateType">年假</div></div>
+    </div>
+    <div class="pt10 f28 total flex pb10  pl20 pr20">
+      <p class="flex-1">总时长</p>
+      <div class="column-total flex">
+        <div class="flex-1 total-day">
+          <input type="tel" class="mr5 color-ff6c47" data-bind="value: totalDays"/>天
+        </div>
+        <div class="flex-1 total-hour">
+          <input type="tel" class="mr5 color-ff6c47" data-bind="value: totalHours"/>小时
+        </div>
+      </div>
+    </div>
+    <ul class="pr pr20 pl20 f28" style="line-height: 1.5rem;">
+      <!-- ko if: leaveList().length > 0 -->
+     <span class="arrow pa" data-bind="visible:leaveList().length != 0"></span>
+      <!-- /ko -->
+      <!-- ko foreach: leaveList -->
+      <li class="flex pt10 pb10">
+        <p class="flex-1" data-bind="text: leaveDesc">年假</p>
+        <div class="w50 flex">
+          <div class="column-input flex-1 w0">
+            <input type="tel" class="input-leave mr5 color-ff6c47" data-bind="value: days"/>天
+          </div>
+          <div class="column-input flex-1 w0">
+            <input type="tel" class="input-leave mr5 color-ff6c47"  data-bind="value: hours" />小时
+          </div>
+        </div>
+      </li>
+      <!-- /ko -->
+    </ul>
+  </section>
+  <section class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+    <div class="f28">请假时间</div>
+    <div class="flex mt20">
+      <div class="flex-1 color-ff6c47 pr"><span data-bind="text:startDateTimeStr">2016/05/20 08:00</span> <input style="width:6rem;" class="pa top left opacity0 vacateApplyDateTimePacker line-unl" id="vacateApplyStartDateTimePacker" type="text" readonly data-bind="value: startDateTimeStr"/></div>
+      <div class="tc">至</div>
+      <div class="flex-1 color-ff6c47 pr tr"><span data-bind="text:endDateTimeStr">2016/05/20 08:00</span> <input style="width:6rem;" class="pa top right opacity0 vacateApplyDateTimePacker line-unl" id="vacateApplyEndDateTimePacker" type="text" readonly data-bind="value: endDateTimeStr"/></div>
+    </div>
+  </section>
+  <section class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+    <div class="f28">原因</div>
+    <div>
+      <textarea class="color-333" rows="2" placeholder="请输入请假原因，不能超过200字" maxlength="200" data-bind="value: reason"></textarea>
+    </div>
+  </section>
+  <section class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+    <div class="f28 clearfix"><span class="fl">请假证明</span><span class="fr color-999" data-bind="click: uploadCertificate"><span data-bind="text: fileList().length > 0 ? '继续上传':'上传'"></span> <img src="./images/icon/right.93c9afb7.png" style="width: 0.325rem" alt=""/></span></div>
+  </section>
+  <div class="dt w pl20 pr20 boxb submit tc pt5">
+    <div class="dtc w50">
+      <div class="w btn btn-confirm tc" data-bind="click:preReset">重置</div>
+    </div>
+    <div class="dtc w50 pl20 boxb">
+      <div class="w btn btn-confirm-hollow tc" data-bind="click: postData">提交</div>
+    </div>
+  </div>
+</section>

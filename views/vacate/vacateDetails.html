@@ -1,0 +1,56 @@
+<section class="pr"  id="vacateDetailsPage" data-bind="foreach:leaveInfo">
+  <article class="pl20 pr20 bg-fff" id="vacate-detail-id">
+    <div class="pt20 pb20 flex dashed-bottom-ebebeb">
+      <p class="flex-1">请假单号</p>
+      <p data-bind="text:$root.applyNo"></p>
+    </div>
+  </article>
+  <article class="flex solid-bottom-d7d7d7 bg-fff mb20 f28 title color-666" id="vacate-detail-state" data-bind="click:$parent.show">
+      <div class="flex-1" style="line-height: .7rem;">
+        <div class="flex">
+          <p class="flex-1" data-bind="text:$root.current().orderStatusShow,css:{'color-ff6c47':status=='NotThrough'}"></p>
+          <p data-bind="text:app.util.formatDateTime($root.current().operationDate())"></p>
+        </div>
+        <!--<p class="item-state-notice mt20" data-bind="visible:$root.current().rejectReason()">原因：&lt;!&ndash; ko text:$root.current().rejectReason &ndash;&gt; &lt;!&ndash; /ko &ndash;&gt;</p>-->
+      </div>
+    <p class="ml20" data-bind="css:{none:history.length==0,'btn-close':!$parent.showInfo(),'btn-omit':$parent.showInfo()}"></p>
+  </article>
+  <article class="column-log" id="vacate-log" data-bind="css:{none:$root.showInfo}">
+    <div class="area-log ova">
+      <ul class="ova" data-bind="foreach:history">
+        <li class="item-log">
+          <p>
+            <span data-bind="text:processNode"></span>
+            <span class="ml10" data-bind="text:app.util.formatDateTime(operationDate)">0000/00/00 00:00:00</span>
+          </p>
+          <p  data-bind="css:{none:!rejectReason}">原因：<!-- ko text:rejectReason --><!-- /ko --></p>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="solid-bottom-d7d7d7 bg-fff mb20">
+    <div class="p20 f28 total clearfix"><span class="fl">总时长</span> <span class="fr color-666" data-bind="text:app.util.leaveHourShow(totalHour)"> 天 小时</span></div>
+    <div class="column-leave pr pr20 pl20 f28">
+      <span class="arrow pa"></span>
+      <ul data-bind="foreach:leaveList">
+        <li class="item-leave clearfix pt20 pb20"><span class="fl" data-bind="text:leaveDesc">年假</span><span class="fr color-666" data-bind="text:app.util.leaveHourShow(hour)"> 天 小时</span></li>
+      </ul>
+    </div>
+  </article>
+  <article class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+    <div class="f28">请假时间</div>
+    <div class="flex mt20">
+      <div class="flex-1 color-666" data-bind="text:app.util.formatDateTimeToHM(startDate)">0000/00/00 00:00</div>
+      <div class="tc">至</div>
+      <div class="flex-1 color-666 tr" data-bind="text:app.util.formatDateTimeToHM(endDate)">0000/00/00 00:00</div>
+    </div>
+  </article>
+  <article class="p20 solid-bottom-d7d7d7 bg-fff  mb20">
+    <div class="f28">原因</div>
+    <div class="reason color-666" data-bind="text:reason">啊啊啊啊啊啊啊</div>
+  </article>
+  <article class="p20 solid-bottom-d7d7d7 bg-fff  mb20" data-bind="click:$root.goPage">
+    <div class="f28 clearfix"><span class="fl">请假证明</span><span class="fr color-999" data-bind="text:fileList.length!=0?'查看':'无'">无</span></div>
+  </article>
+
+</section>

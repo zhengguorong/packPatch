@@ -1,0 +1,22 @@
+<section id="viewCapacityList" class="f30">
+  <div class="column-search bg-fff solid-bottom-d7d7d7 clearfix" data-bind="visible: searchIsShowed()">
+    <input class="input-search" placeholder="输入门店编码或名称" data-bind="value: keywordCache">
+    <p class="btn-search color-1fb8ff" data-bind="click: search">搜索</p>
+  </div>
+  <div class="container" data-bind="event: { scroll: scrollToLoad }">
+    <ul class="list" data-bind="foreach: list, style: { 'min-height': pageState() === '_WAITING' ? '110%' : 'auto', 'padding-top': searchIsShowed() ? '50px' : '0' }" style="transition: padding 0.1s">
+      <li class="block bg-fff solid-bottom-d7d7d7" data-bind="click: $root.goToInfo">
+          <div class="title">
+            <i class="icon"></i>
+            <p><span data-bind="text: storeId"></span> <span data-bind="text: storeName"></span></p>
+            <i class="link"></i>
+          </div>
+          <div class="info clearfix solid-top-e5e5e5" data-bind="visible: capaDate">
+            <p class="attribute"><span class="color-999">日期：</span><span data-bind="text: (new Date(capaDate)).format('yyyy/MM')"></span></p>
+            <p class="attribute"><span class="color-999">总容量：</span><span data-bind="text: app.util.formatLargeMoney(sumMoney)"></span></p>
+          </div>
+      </li>
+    </ul>
+  </div>
+  <p class="empty-intro" data-bind="visible: list().length === 0"><img class="empty-image" src="./images/icon/img-empty.69638ca9.png" alt=""><br />暂无数据</p>
+</section>

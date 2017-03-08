@@ -1,0 +1,47 @@
+<section id="viewCapacityInfo" class="f30 flex">
+  <header class="flex-header">
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <i class="contain-left pa top left ml20" onclick="app.util.goBack()"></i>
+      <p class="title-header">容量信息</p>
+      <div class="pa right top pr20" data-bind="click: function () { pageState('_ADDING'); }"><img class="vm" src="./images/icon/add@2x@0.5x.7b148e28.png" style="width: 1.1rem" alt=""></div>
+    </div>
+  </header>
+  <p class="title bg-fff bbd7d7d7"><span data-bind="text: storeId"></span> <span data-bind="text: storeName"></span></p>
+  <div class="main clearfix" id="viewCapacityInfoMain" data-bind="style: { height: mainHeight() || 'auto' }">
+    <ul class="aside" data-bind="foreach: infoList">
+      <li class="aside-item" data-bind="click: $root.getInfo.bind($data, brandCode), css: { selected: $root.selectedBrandCode() === brandCode }">
+        <p class="name color-666" data-bind="text: brandDesc"></p>
+        <p class="count color-999" data-bind="text: (count ? count : 0) + '条'"></p>
+      </li>
+    </ul>
+    <div class="list solid-left-e5e5e5">
+      <ul data-bind="foreach: infoListMonthContent">
+        <li>
+          <div class="list-item bg-fff">
+            <header class="head solid-bottom-e5e5e5" data-bind="click: $root.goToCheck"><span data-bind="text: (new Date(capaDate)).format('yyyy年MM月')"></span><i class="head-link"></i></header>
+            <article class="detail solid-bottom-e5e5e5" data-bind="foreach: secondBrandVoList">
+              <dl class="line clearfix">
+                <dt class="name color-999" data-bind="text: brandDesc"></dt>
+                <dd class="price color-666" data-bind="text: app.util.formatLargeMoney(sumMoney)"></dd>
+              </dl>
+            </article>
+            <footer class="foot clearfix">
+              <p class="total color-999">总金额：<span class="total-span color-333" data-bind="text: app.util.formatLargeMoney(sumMoney)"></span></p>
+              <p class="edit color-00baff" data-bind="click: $root.goToEdit"><i class="edit-icon"></i><span class="edit-text">编辑</span></p>
+            </footer>
+          </div>
+        </li>
+      </ul>
+      <div class="empty-intro" data-bind="visible: infoListMonthContent().length === 0">
+        <img class="empty-image" src="./images/icon/img-empty.69638ca9.png" alt=""><br />暂无数据
+      </div>
+    </div>
+  </div>
+  <div class="add-list-layout" data-bind="css: { active: pageState() === '_ADDING' }, click: function () { pageState('_NORMAL') }">
+    <div class="add-list">
+      <ul data-bind="foreach: infoList">
+        <li class="line solid-top-e5e5e5" data-bind="text: brandDesc, click: $root.goToAdd.bind($data, brandCode), clickBubble: false"></li>
+      </ul>
+    </div>
+  </div>
+</section>

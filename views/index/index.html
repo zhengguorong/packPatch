@@ -1,0 +1,37 @@
+<section id="indexPage">
+  <header class=" bg-1fb8ff flex">
+    <div class="flex-1 tl" data-bind="click:goToUserInfo">
+      <img class="man" src="./images/icon/man.d12e0259.png" alt=""/>
+    </div>
+    <div class="flex-1 tc">
+      <img class="logo" src="./images/icon/logo.ba35bdce.png" alt=""/>
+    </div>
+    <div class="flex-1 tr" data-bind="click:goToSetUp">
+      <img class="settings" src="./images/icon/settings.c51cc573.png" alt=""/>
+    </div>
+  </header>
+  <!-- ko if: latestMsg()-->
+  <div class="news mb20 bg-fff color-666 f28 pr" data-bind="click:goNoticeList">
+    <img class="fl pa" src="./images/icon/notification.47f17320.png" alt=""/>
+    <marquee align="middle" scrollamount="2" class="fl"><!-- ko text: latestMsg--><!-- /ko --></marquee>
+  </div>
+  <!-- /ko -->
+  <article class="container-right" data-bind="foreach:rightsList">
+    <div class="column-right ovh bg-fff" data-bind="foreach:$data">
+      <div class="text pr fl f28 color-333"  data-bind="click:$root.goPage,attr:{id:menuCode}">
+        <img class="db" alt="" data-bind="attr:{src:iconImg},css:{none:!iconImg}"/>
+        <p class="tc" data-bind="text:menuName,css:{none:!menuName}"></p>
+        <span class="tips-num pa" data-bind="text:notReadCount,visible:notReadCount"></span>
+      </div>
+    </div>
+  </article>
+
+  <!-- 重新加载模块 start-->
+  <article class="column-reLoad tc" data-bind="css:{none:rightsTotalLength}">
+    <img class="icon-null" src="./images/icon/emptyBotl@2x.cfa2571a.png"/>
+    <p class="f28 color-999">啊哦，加载失败...</p>
+    <button class="btn btn-reLoad f30" data-bind="click:getAppRights">刷新</button>
+  </article>
+  <!-- 重新加载模块 start-->
+
+</section>

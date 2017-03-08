@@ -1,0 +1,29 @@
+<section id="flowListPage">
+  <ul data-bind="foreach:storeCustomerList">
+    <li class="item flex" data-bind="click:$root.gotoStoreInfo">
+      <p class="icon-store">
+        <img class="icon" src="./images/icon/icon-flowStore.f43bfb4f.png"/>
+      </p>
+      <div class="flex-1">
+        <div class="title flex">
+          <p class="flex-1 f30 color-333" data-bind="text:storeName">金华-世纪华联-义务南门店</p>
+          <p class="btn-more ml10"></p>
+        </div>
+        <div class="data flex">
+          <p class="flex-1">
+            <span class="label-data">月记录:</span>
+            <span class="num-data" data-bind="text:monthSumText">10000</span>
+          </p>
+          <p class="flex-1">
+            <span class="label-data">日记录:</span>
+            <span class="num-data" data-bind="text:daySumText">10000</span>
+          </p>
+          <p class="flex-1">
+            <span class="label-data">时段记录:</span>
+            <span class="num-data" data-bind="text:timeSumText">10000</span>
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>

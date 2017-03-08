@@ -1,0 +1,26 @@
+<section id="addStoreStaffPage">
+  <div class="column" data-bind="click:scan">
+    <p class="icon icon-scan">
+      <img class="w" src="./images/icon/QR-code-white@2x.cb47095c.png"/>
+    </p>
+    <p class="tc f30">扫码添加</p>
+  </div>
+  <div class="column" data-bind="click:addCode">
+    <p class="icon icon-code">
+      <img class="w" src="./images/icon/codeEnter@2x.b2ed825f.png"/>
+    </p>
+    <p class="tc f30">编码添加</p>
+  </div>
+  <article class="column-cover" data-bind="visible:isShowEdit()">
+    <div class="container pt20">
+      <p class="tc f30 mt20 fb">编码添加</p>
+      <p class="pl20 pr20">
+        <input class="input w boxb" type="tel" data-bind="value:codeText,valueUpdate:'afterkeydown'" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" placeholder="输入人员编码" />
+      </p>
+      <div class="flex border-top-d7d7d7 color-1fb8ff tc">
+        <p class="flex-1 pt15 pb15 solid-right-d7d7d7" data-bind="click:function(){isShowEdit(false);codeText('');}">取消</p>
+        <p class="flex-1 pt15 pb15" data-bind="click:saveCode">添加</p>
+      </div>
+    </div>
+  </article>
+</section>

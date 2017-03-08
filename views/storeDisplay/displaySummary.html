@@ -1,0 +1,10 @@
+<section class="pt20" id="displaySummaryPage">
+  <article class="column-star mb20 flex color-333 f30 bg-fff bbd7d7d7">
+    <p class="mr20">自我评价</p>
+    <div class="flex-1 ml20" data-bind="foreach:setStarList">
+      <i class="icon-star" data-bind="css:{'active':$index()<$root.starSun()},click:$root.setStar"></i>
+    </div>
+  </article>
+  <textarea class="summary w f30 bg-fff border-none color-666 boxb" data-bind="value:summary" placeholder="经验总结，限制80字" maxlength="80"></textarea>
+  <div class="save pa bottom f34" data-bind="click:saveSummary">保 存</div>
+</section>

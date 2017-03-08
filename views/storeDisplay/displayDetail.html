@@ -1,0 +1,93 @@
+<section id="displayDetailPage" class="boxb" style="padding-bottom: 4rem;">
+  <article class="bbd7d7d7">
+    <p class="label-colum">门店信息</p>
+    <ul class="pl20 pr20 bg-fff f30">
+      <li class="title flex">
+        <p class="flex-1"><span data-bind="text:itemList().planId">C-0000001</span> <span data-bind="text:itemList().storeName">广州-沃尔玛-新港店</span></p>
+        <p class="ml10 color-1eb8ff" data-bind="text:app.util.getStoreDisplayStatus(itemList().status).statusText">未执行</p>
+      </li>
+      <li class="column-item flex" data-bind="click:$root.goToAgreement">
+        <p class="flex-1">协议详情</p>
+        <p class="btn-more"></p>
+      </li>
+    </ul>
+  </article>
+  <article class="bbd7d7d7" data-bind="visible:isDisplay()&&!isUnHandle()">
+    <p class="label-colum">陈列信息</p>
+    <ul class="pl20 pr20 bg-fff f30">
+      <li class="column-item flex">
+        <p class="flex-1">执行时间</p>
+        <p class="color-666 f30">
+          <span data-bind="visible:itemList().status!=app.const.E0055,text:app.util.formatDate(itemList().executeStartTime)"></span><span data-bind="visible:itemList().status!=app.const.E0055">-</span>
+          <span data-bind="visible:itemList().status!=app.const.E0060 && itemList().status!=app.const.E0055,text:app.util.formatDate(itemList().executeEndTime)"></span>
+          <span data-bind="visible:itemList().status==app.const.E0060">至今</span>
+          <span data-bind="visible:itemList().status==app.const.E0055">无</span>
+        </p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">完成装修</p>
+        <p class="color-666 f30" data-bind="text:itemList().decorationDate?app.util.formatDate(itemList().decorationDate):'无'">2016/10/31</p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">陈列类型</p>
+        <p class="color-666 f30">
+          <span class="label-type" data-bind="text:typeName">堆头（个）</span>
+          <span>数量<!--ko text:itemList().volume--><!--/ko--></span>
+        </p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">面积(㎡)</p>
+        <p class="color-666 f30" data-bind="text:itemList().area">23.89</p>
+      </li>
+      <li class="column-item flex">
+        <p class="flex-1">陈列位置</p>
+        <p class="color-666 f30" data-bind="text:itemList().displayLocation">迎向人流方向第一位</p>
+      </li>
+    </ul>
+  </article>
+  <article class="bbd7d7d7" data-bind="visible:productList().length > 0 && isDisplay() && !isUnHandle()">
+    <p class="icon-require label-colum">陈列产品</p>
+    <ul class="pl20 pr20 bg-fff f30" data-bind="foreach:productList">
+      <li class="column-product flex" data-bind="visible:$index()<2 || $root.isShowProduct()">
+        <p class="flex-1" data-bind="text:prdName">机洗至尊</p>
+      </li>
+    </ul>
+    <p class="pl20 pr20 pt30 pb30 bg-fff bbd7d7d7 tc color-1eb8ff" data-bind="click:$root.productTab,visible:$root.productList().length>2">
+      <span class="f30 mr15" data-bind="visible:!$root.isShowProduct()">更多</span>
+      <span class="f30 mr15" data-bind="visible:$root.isShowProduct()">收起</span>
+      <img class="drop-down" src="./images/icon/icon-down-blue@2X.42d36e6c.png" data-bind="css:{'active':$root.isShowProduct()}"/>
+    </p>
+  </article>
+  <article class="bbd7d7d7" data-bind="visible:picList().length > 0 && isDisplay() && !isUnHandle()">
+    <p class="label-colum"><span class="icon-require">陈列照片</span><span class="ml5">(上传1-3张照片)</span></p>
+    <ul class="column-pic clearfix bg-fff" data-bind="foreach:picList">
+      <li class="item-pic">
+        <div class="contain-pic boxc">
+          <img class="pic" data-bind="attr:{src:filePath },click:$root.setGlass"/>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <!-- 不执行显示 -->
+  <article class="mt20 pl20 pr20 bg-fff bbd7d7d7" data-bind="visible:!isDisplay()">
+    <div class="pt30 pb30 f30 solid-bottom-e5e5e5">
+      <p class="color-333">不执行原因</p>
+      <p class="mt10 tl color-666" data-bind="text:itemList().notExecuReason">销售不好、前期问题未解决</p>
+    </div>
+    <div class="pt30">
+      <p class="color-333 f30">说明</p>
+      <p class="pt10 pb30 color-999 f28 text-brake" data-bind="text:itemList().remark">补充说明不执行的原因</p>
+    </div>
+  </article>
+  <article class="bbd7d7d7" data-bind="visible:isDisplay() && itemList().remark && !isUnHandle()">
+    <p class="label-colum" data-bind="visible:itemList().remark">说明</p>
+    <div class="pt30 pb30 pl20 pr20 bg-fff color-333 f30 text-brake" data-bind="text:itemList().remark,visible:itemList().remark">补充说明，不止一行</div>
+  </article>
+  <article class="bbd7d7d7" data-bind="visible:isDisplay() && itemList().summary && !isUnHandle()">
+    <p class="label-colum" data-bind="visible:itemList().summary">总结</p>
+    <div class="pt30 pb30 pl20 pr20 bg-fff color-333 f30 text-brake" data-bind="text:itemList().summary,visible:itemList().summary">经验总结，80字很长不只一排</div>
+  </article>
+  <article class="column-glass tc bbd7d7d7" data-bind="click:showGlass,visible:isShowGlass">
+    <img class="pic" data-bind="attr:{src:glassPic}"/>
+  </article>
+</section>

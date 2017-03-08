@@ -1,0 +1,60 @@
+<section id="editCapacityPage">
+  <p class="title mb20 f30 color-333 bg-fff bbd7d7d7" data-bind="text:storeName">金华-世纪华联-义乌南门店义乌南门店义乌南门店义乌南门店义乌南门店</p>
+  <div class="pl20 bg-fff bbd7d7d7">
+    <div class="column-option flex">
+      <p class="label require f28">月份</p>
+      <input class="flex-1 db border-none tr color-333 rtl" id="capaDate" placeholder="请选择" data-bind="value:capaDate,visible:pageFlag()=='add'" />
+      <p class="flex-1 tr color-333" data-bind="text:capaDate,visible:pageFlag()!='add'"></p>
+      <p class="btn-more ml15" data-bind="visible:pageFlag()=='add'"></p>
+    </div>
+    <div class="column-option flex">
+      <p class="label require f28">数据来源</p>
+      <div class="flex-1 pr">
+        <div class="tr" data-bind="text:sourceCode()?sourceCode().fieldDesc:'请选择',css:{'color-999':!sourceCode(),'color-333':sourceCode()}">11111</div>
+        <select class="pa top left w border-none opa" data-bind="options:sourceList,optionsText:'fieldDesc',value:sourceCode,optionsCaption:'请选择',visible:pageFlag()=='add'"></select>
+      </div>
+      <p class="btn-more ml15" data-bind="visible:pageFlag()=='add'"></p>
+    </div>
+  </div>
+  <p class="column-label f24">金额为POS机零售价</p>
+  <div class="column-pos flex bbd7d7d7 f30">
+    <p class="item flex-1">总金额(元)：<span class="num" data-bind="text:sumMoney">0</span></p>
+    <p class="item flex-1">总数量(件)：<span class="num" data-bind="text:sumNumber">0</span></p>
+  </div>
+  <!-- 二级列表 start-->
+  <ul class="list-capacity" data-bind="foreach:secondBrandVoList">
+    <li class="item bbd7d7d7">
+      <div class="info solid-bottom-e5e5e5">
+        <p class="w50 dib vm type-capacity"><span data-bind="text:secondBrandDesc"></span>容量</p><!--
+        --><div class="w50 dib vm">
+            <p class="color-999 mb15">总数量(件)：<span class="color-333" data-bind="text:sumNumber">0</span></p>
+            <p class="color-999">总金额(元)：<span class="color-333" data-bind="text:sumMoney">0</span></p>
+        </div>
+      </div>
+      <!--品牌列表 start-->
+      <ul class="pl20 bg-fbfbfb solid-bottom-e5e5e5 f28" data-bind="foreach:thirdBrandVoList">
+        <li class="item-brand pr20">
+          <p class="w50 dib vm color-666" data-bind="text:thirdBrandDesc">蓝月亮（蓝月亮）</p><!--
+       --><div class="w50 pt30 pb30 dib vm">
+            <p class="mb20 color-666 tr">
+              <input class="input-edit f28" type="tel" placeholder="填写数量" data-bind="value:sumNumber,valueUpdate:'afterkeydown'"/>件
+            </p>
+            <p class="mt5 color-666 tr">
+              <input class="input-edit f28" type="text" placeholder="填写金额"  data-bind="value:sumMoney,valueUpdate:'afterkeydown'"/>元
+            </p>
+          </div>
+        </li>
+      </ul>
+      <!--品牌列表 end-->
+      <p class="column-add bg-fbfbfb f28" data-bind="click:$root.addBrand">
+        <img class="vm" src="./images/icon/icon-plus-blue.0ba885dd.png"/><span class="dib ml10 lh100 vm">添加重点品牌</span>
+      </p>
+    </li>
+  </ul>
+  <!--二级列表 end-->
+  <div class="p20 bg-fff bbd7d7d7">
+    <p class="mb20 f28 color-666">备注</p>
+    <textarea class="remark dib w boxb color-333" placeholder="备注信息字数不可超过80字！" maxlength="80" data-bind="value:remark"></textarea>
+  </div>
+  <buttom class="btn btn-confirm boxb f34" data-bind="click:save">保 存</buttom>
+</section>

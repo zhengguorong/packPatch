@@ -1,0 +1,23 @@
+<section id="targetProgressPage">
+  <div class="staff-search flex p20 bg-fff">
+    <div class="pr flex-1">
+      <input class="search w f30 pr50" type="search" placeholder="请输入门店名称" data-bind="value:keyword,valueUpdate:'afterkeydown'"/>
+      <a class="btn-delete pa vc" data-bind="click:clear,visible:keyword()"></a>
+    </div>
+    <button class="btn-search pl20 f30 color-1fb8ff" data-bind="click:getInfo">搜索</button>
+  </div>
+  <ul class="list-period" data-bind="foreach:itemList">
+    <li class="item-period mt20 pl20 bg-fff bbd7d7d7">
+      <div class="column-item flex">
+        <p class="flex-1 ell f34 color-333" data-bind="text:storeName"></p>
+        <p><button class="btn btn-confirm" data-bind="click:$root.periodAdd">时控提报</button></p>
+      </div>
+      <div class="column-item flex" data-bind="click:$root.periodList">
+        <p class="flex-1 color-999" data-bind="visible:newTime">最新提报：<span data-bind="text:newTime"></span></p>
+        <p class="flex-1 color-ff6c47" data-bind="visible:!newTime">尚未提报</p>
+        <p class="f28 color-999">详情查看</p>
+        <p class="btn-more ml10"></p>
+      </div>
+    </li>
+  </ul>
+</section>

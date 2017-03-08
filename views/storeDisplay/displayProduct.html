@@ -1,0 +1,28 @@
+<section id="displayProductPage">
+  <div class="staff-search flex p20 bg-fff">
+    <div class="pr flex-1">
+      <input class="search w f30" type="search" placeholder="请输入编码/名称"
+             data-bind="value:keyword,valueUpdate:'afterkeydown'"/>
+      <a class="btn-delete pa vc" data-bind="click:clearSearch,css:{none:keyword()==''}"></a>
+    </div>
+    <button class="btn-search pl20 f30 color-1fb8ff" data-bind="click:loadSearchList,disable:isSubmit()">搜索</button>
+  </div>
+  <div class="history">
+    <!-- ko if: !hasPostSubmit() && productHistoryList().length > 0 -->
+    <div class="clearfix color-999 pt20 pb20">
+      <span class="fl pl20">搜索历史</span>
+      <span class="fr pr20" data-bind="click: clearSearchHistory"><img class="mr10" src="./images/icon/delete.145b44d2.png"/>清除</span>
+    </div>
+    <ul class="bg-fff pl20 pr20 solid-bottom-d7d7d7 f38 color-333" data-bind="foreach: productHistoryList">
+      <li class="solid-bottom-e5e5e5 clearfix pt20 pb20" data-bind="click:$parent.selectProduct"><span class="fl" data-bind="text:prdName">5316-3kg洁净瓶-自然</span></li>
+    </ul>
+    <!-- /ko -->
+    <!--<ul class="bg-fff pl20 pr20 solid-bottom-d7d7d7 f38 color-333 mt20" data-bind="foreach: productRegularList">-->
+    <!--<li class="solid-bottom-e5e5e5 clearfix" data-bind="click:$parent.selectProduct"><span class="fl" data-bind="text:prdName">5316-3kg洁净瓶-自然</span><span class="fr">￥<span data-bind="text: app.util.priceTransform(price)"></span></span></li>-->
+    <!--</ul>-->
+    <ul class="bg-fff pl20 pr20 solid-bottom-d7d7d7 f38 color-333 mt20" data-bind="visible:productSearchList().length>0,foreach: productSearchList">
+      <li class="solid-bottom-e5e5e5 clearfix pt20 pb20" data-bind="click:$parent.selectProduct"><span class="fl" data-bind="text:prdName">5316-3kg洁净瓶-自然</span></li>
+    </ul>
+    <div data-bind="visible:isNoProduct,text:noProductText" class="noProduct f28 color-999 tc"></div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+<section id="periodListPage" class="f30 color-333">
+  <nav class="nav-time pl20 pr20 mb20 ova text-nowrap bg-fff bbd7d7d7 f24" id="periodAxis" data-bind="foreach:timeList">
+    <div class="item-time dib color-999" data-bind="css:{'active':$root.selectedDate() == $data},click:$root.setSelect">
+        <!-- ko if:$index() != $parent.timeList().length-1 && $index() != $parent.timeList().length-2 --><span data-bind="text:app.util.getDay($data)"></span><!-- /ko -->
+        <!-- ko if:$index() == $parent.timeList().length-2 -->昨天<!-- /ko -->
+        <!-- ko if:$index() == $parent.timeList().length-1 -->今天<!-- /ko -->
+      <span data-bind="text:app.util.formatPattern($data,'MM')">9</span>月<span data-bind="text:app.util.formatPattern($data,'dd')">9</span>日
+    </div>
+  </nav>
+  <ul class="list-period" data-bind="foreach:storeNumVo">
+    <li class="item-period pl20 bg-fff bbd7d7d7">
+      <p class="pt30 pb30 f34 fb solid-bottom-e5e5e5" data-bind="text:storeName">广州-沃尔玛-新港店</p>
+      <ul class="list-num ovh color-666" data-bind="foreach:typeList">
+        <li class="item-num fl"><span data-bind="text:serviceDesc"></span>：<span data-bind="text:serviceNum">120</span></li>
+      </ul>
+    </li>
+    <!-- ko foreach:$root.timeNumList -->
+    <li class="item-period bg-fff bbd7d7d7">
+      <div class="flex ml20 pt30 pb30 pr20 solid-bottom-e5e5e5">
+        <p class="flex-1 f34 fb" data-bind="text:data.bpName">张三</p>
+        <p class="color-999">截止：<span data-bind="text:data.itemName">9:30</span></p>
+        <p class="btn-open ml20" data-bind="click:$root.changeShow,css:{'active':isShowList()}"></p>
+      </div>
+      <article class="bg-fbfbfb">
+        <!--个人小计-->
+        <div class="bg-fff">
+          <ul class="list-num ml20 ovh color-666" data-bind="foreach:data.typeList">
+            <li class="item-num fl"><span data-bind="text:serviceDesc"></span>：<span data-bind="text:serviceNum">120</span></li>
+          </ul>
+        </div>
+        <!--个人时段列表-->
+        <div data-bind="foreach:data.timeNumList,visible:isShowList()">
+          <div class="item-period-time ml20">
+            <p class="mt30" data-bind="text:itemName">8:00 - 9:00</p>
+            <ul class="list-num ovh color-666" data-bind="foreach:typeList">
+              <li class="item-num fl"><span data-bind="text:serviceDesc"></span>：<span data-bind="text:serviceNum">120</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </li>
+    <!-- /ko -->
+  </ul>
+</section>

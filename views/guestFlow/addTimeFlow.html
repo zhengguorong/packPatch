@@ -1,0 +1,50 @@
+<section id="addTimeFlowPage">
+  <article class="container-flow">
+    <div class="column-info pl20">
+      <p class="title" data-bind="text:customerDetails().storeName">金华-世纪华联-义务南门店义务南门义务南门店义务南门</p>
+    </div>
+    <div class="column-info mb20 bbd7d7d7">
+      <p class="amount ml20">时段成交额：<span class="money f28" data-bind="text:customerDetails().sumPrice">1000.23</span><span class="money f20">(元)</span></p>
+    </div>
+    <div class="column-input column f28">
+      <div class="item-input flex">
+        <p class="label-input icon-require">时段</p>
+        <div class="pr solid-right-e5e5e5">
+          <input class="input-date db" id="day" data-bind="value:day,css:{'color-ff6c48':!planId()}" readonly placeholder="选择日期"/>
+          <p class="pa top bottom left right" data-bind="css:{none:!planId()}"></p>
+        </div>
+        <div class="pr">
+          <input class="input-date db" id="time" data-bind="value:time,css:{'color-ff6c48':!planId()}" readonly placeholder="选择时段"/>
+          <p class="pa top bottom left right"  data-bind="visible:planId()||!day(),click:selectTime"></p>
+        </div>
+        <p class="flex-1 tr f28 color-00baff"><span data-bind="text:customerDetails().dayNum"></span>小时</p>
+      </div>
+      <div class="item-input flex">
+        <p class="label-input icon-require">时段进店人数(人)</p>
+        <input class="db flex-1 border-none tr color-333"  id="timePeople" data-bind="value:customerDetails().personNum,click:app.util.focus.bind(this,'timePeople')" placeholder="若无，请填0" />
+      </div>
+      <div class="item-input flex">
+        <p class="label-input icon-require">时段成交单数</p>
+        <input class="db flex-1 border-none tr color-333"  id="timeTransaction" data-bind="value:customerDetails().billNum,click:app.util.focus.bind(this,'timeTransaction')"  placeholder="请输入" />
+      </div>
+      <div class="item-input flex">
+        <p class="label-input icon-require">时段平均客单价(元)</p>
+        <input class="db flex-1 border-none tr color-333"  id="timeMean" data-bind="value:customerDetails().averagePrice,click:app.util.focus.bind(this,'timeMean')"  placeholder="请输入" />
+      </div>
+      <div class="item-input flex pr">
+        <p class="label-input icon-require">数据来源</p>
+        <select class="w50 pa border-none opa right" data-bind="options: typeCodeList, optionsText: 'fieldDesc',value:selectDataSourse,optionsCaption:'请选择'">请选择</select>
+        <p class="item-select flex-1 right tr" data-bind="text:selectDataSourse()?selectDataSourse().fieldDesc:'请选择',css:{'color-999':!selectDataSourse(),'color-333':selectDataSourse()}">选中值显示地方</p>
+        <p class="btn-more ml15"></p>
+      </div>
+      <div class="item-input">
+        <p class="label-input">备注</p>
+        <textarea class="remark mt20 border-none f24 color-333" data-bind="value:customerDetails().remark"  maxlength="50" placeholder="备注信息字数不可超过50字！"></textarea>
+      </div>
+    </div>
+  </article>
+  <div class="column-btn pt30 pb30 pl20 pr20 flex">
+    <button class="btn btn-confirm-hollow w mr20 db f34 flex-1" data-bind="css:{none:!planId()},click:remove">删 除</button>
+    <button class="btn btn-confirm w db f34 flex-1" data-bind="click:submit">保 存</button>
+  </div>
+</section>

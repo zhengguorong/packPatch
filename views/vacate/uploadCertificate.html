@@ -1,0 +1,42 @@
+<section id="uploadCertificatePage" class="bg-fff">
+  <div class="picGroup clearfix">
+    <!--接口读的图片列表-->
+    <!--ko foreach:fileList-->
+    <div data-bind="visible:$parent.fileList.length==0">
+      <img data-bind="attr:{src:filePath},click:$parent.fileListGlass">
+      <span class="pa" data-bind="click:$parent.deleteFileList.bind($data),visible:$root.source()!='see'"></span>
+    </div>
+    <!-- /ko -->
+    <!--接口读的图片列表-->
+    <!--客户端上传的图片列表-->
+      <!-- ko if:fileList().length<5&&source()!='see'-->
+      <!--ko foreach:picList-->
+      <div>
+          <div data-bind="visible:dataURL">
+            <img data-bind="attr: { src: dataURL }, visible:dataURL,click:$parent.picListGlass">
+            <span class="pa" data-bind="visible:dataURL,click:$root.picListList"></span>
+          </div>
+          <div class="add" data-bind="visible:!dataURL()" >
+            <div class="tc pr">
+              <input type="file" data-bind="fileInput: $data" class="pa opa top left"/>
+              <img src="./images/icon/addToUpload@3x.cffd0ed6.png" alt=""/>
+            </div>
+          </div>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+
+    <!--客户端上传的图片列表-->
+  </div>
+  <div class="btnBox" data-bind="visible:source()!='see'">
+    <div class="btn bg-1fb8ff tc color-fff" data-bind="click:confirm">确认</div>
+  </div>
+  <div class="f24 color-999 btnBox"  data-bind="visible:source()!='see'">
+    <p>提示：</p>
+    <p class="pt10 pb10">1.最多上传5张图片；</p>
+    <p class="pb10">2.每张图片不能大于5M。</p>
+  </div>
+  <div class="img-glass-cover pf bottom left right" data-bind="visible:isGlass,click:hideGlass" >
+    <img class="img-glass" data-bind="attr: { src:selectedImg }"/>
+  </div>
+</section>

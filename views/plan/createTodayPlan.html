@@ -1,0 +1,117 @@
+<section id="createTodayPlanPage">
+  <section class="header pl20 pr20 bg-fff solid-bottom-d7d7d7 pr">
+    <div class="color-333 f28 "><span data-bind="text:app.util.formatDate(planDate())">2016-04-18</span> <span
+      data-bind="text:app.util.getDay(planDate())"></span></div>
+    <div class="hearderRightBox pa color-999 f28">上班</div>
+  </section>
+
+  <div>
+    <section class="bg-fff mt20 solid-bottom-d7d7d7">
+      <div class="planTag clearfix tc color-999 f28">
+        <!-- ko foreach:planList -->
+        <div data-bind="css: {selected: isSelected}, click: $root.selectPlan">
+          <div>计划<span data-bind="text: ($index() + 1)"></span></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko foreach:blankPlanBox -->
+        <div>
+
+        </div>
+        <!-- /ko -->
+      </div>
+      <div class="areaInfo pl20 pr20">
+        <!-- ko if:selectedPlan -->
+        <p data-bind="click: selectStore" class="f28 color-333">
+          <span data-bind="text:selectedPlan().storeId()">20000101</span><span class="pl20"
+                                                                               data-bind="css:{'color-333':selectedPlan().storeId()==''},text:selectedPlan().storeName()">广州-大润发-新塘店</span>
+          <img class="fr" src="./images/icon/right.93c9afb7.png" alt=""/>
+          <span data-bind="visible:selectedPlan().storeId()==''" class="fr color-ff6c47 mr20">请选择</span>
+        </p>
+
+        <div class="wortkType solid-top-e5e5e5 pt20 pb10" data-bind="foreach: classList">
+          <div class="btn mb30"
+               data-bind="text: fieldDesc, css:{selected: $root.classIsExist($data)}, click: $parent.selectClass">早班
+          </div>
+        </div>
+
+        <div class="pb20 pr">时间：
+          <!-- 第一个时间对-->
+        <span class="color-ff6c47 pr20">
+        <span data-bind="text:startTimeOneStr"></span>
+        <input class="pa timePicker" id="timePickerOne" name="timePicker" readonly
+               type="text" data-bind="value: startTimeOne">
+        </span>
+          -
+          <span class="pl20 color-ff6c47">
+            <span data-bind="text:endTimeOneStr"></span>
+                  <input class="pa timePicker" id="timePickerTwo" name="timePicker" readonly
+                         type="text" data-bind="value: endTimeOne">
+          </span>
+          <!-- 第一个时间对end-->
+          <!-- 第二个时间对-->
+          <span data-bind="visible: selectedPlan().classId() == 'Z005'">
+            <span class="color-ff6c47 pr20 pl50">
+            <span data-bind="text:startTimeTwoStr"></span>
+            <input class="pa timePicker" id="timePickerThree" name="timePicker" readonly
+                   type="text" data-bind="value: startTimeTwo">
+            </span>
+            -
+            <span class="pl20 color-ff6c47">
+              <span data-bind="text:endTimeTwoStr"></span>
+                    <input class="pa timePicker" id="timePickerFour" name="timePicker" readonly
+                           type="text" data-bind="value: endTimeTwo">
+            </span>
+          </span>
+          <!-- 第二一个时间对end-->
+        </div>
+        <!-- /ko -->
+
+      </div>
+    </section>
+    <!-- ko if:selectedPlan -->
+    <section class="pl20 pr20 bg-fff mt20 solid-bottom-d7d7d7">
+      <p class="pt20 pb20 f28 color-333">工作任务</p>
+      <div class="wortkType" data-bind="foreach: taskList">
+        <div class="btn mb20"
+             data-bind="text: fieldDesc, css:{selected: $root.taskIsExist($data)}, click: $parent.selectTask">晚班
+        </div>
+      </div>
+
+    </section>
+    <section class="productBox mt20 bg-fff pl20 pr20 solid-bottom-d7d7d7 mb20">
+      <div class="dashed-bottom-ebebeb height80">
+        <span class="color-333 f28 ">品种数：<span data-bind="text:selectedPlan().prdList().length "></span></span>
+        <div class="btn tc fr color-666" data-bind="click: addProduct">添加产品</div>
+      </div>
+      <div class="clearfix solid-bottom-e5e5e5 height80">
+        <span class="fl">总支数：<span data-bind="text: selectedPlan().totalNum()">2</span></span>
+      <span class="fr">总金额：¥<span
+        data-bind="text: app.util.priceTransform(selectedPlan().totalPrice())">0.00</span></span>
+      </div>
+      <!-- ko foreach: selectedPlan().prdList -->
+      <div class="pt20 pb20 dashed-bottom-ebebeb">
+        <p class="pb20" data-bind="text: prdName">1101 660g机洗滚筒亮白组合-兰香x12</p>
+
+        <div class="clearfix amountBox">
+          <span class="fl mr20">支数</span>
+
+          <div class="fl">
+            <div class="clearfix ">
+              <img class="fl" src="./images/icon/minus.126ea2da.png" data-bind="click: reduceNum"/>
+              <input class="fl amountText tc" type="tel" data-bind="click:changPosition,value:prdNum"/>
+              <!--<div class="fl amountText tc" data-bind="text: prdNum">999</div>-->
+              <img class="fl" src="./images/icon/plus.8e608519.png" data-bind="click: addNum"/>
+            </div>
+          </div>
+          <span class="fr">¥<span data-bind="text: app.util.priceTransform(price()*prdNum())">0.00</span></span>
+        </div>
+      </div>
+      <!-- /ko -->
+    </section>
+    <div class="p20 flex tc commit">
+      <div class="flex-1 solid-ff6c47 bg-fff mr10" data-bind="click:cancelPlan">取消</div>
+      <div class="flex-1 bg-ff6c47 ml10" data-bind="click: submitPlan">提交</div>
+    </div>
+    <!-- /ko -->
+  </div>
+</section>

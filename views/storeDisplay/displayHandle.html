@@ -1,0 +1,107 @@
+<section id="displayHandlePage">
+  <div class="container-handle pr ova">
+    <article class="bbd7d7d7">
+      <p class="label-colum">门店信息</p>
+      <ul class="pl20 pr20 bg-fff f30">
+        <li class="title flex">
+          <p class="flex-1"><span data-bind="text:storeDiplay().planId">C-0000001</span> <span data-bind="text:storeDiplay().storeName">广州-沃尔玛-新港店</span></p>
+          <p class="color-1eb8ff" data-bind="text:storeDiplay().status().statusText">未执行</p>
+        </li>
+        <li class="column-item flex" data-bind="click:gotoPage.bind($data,storeDiplay())">
+          <p class="flex-1">协议详情</p>
+          <p class="btn-more"></p>
+        </li>
+        <!-- ko if:storeDiplay().status().status!=app.const.E0060-->
+        <li class="column-item flex">
+          <p class="flex-1">是否执行</p>
+          <div class="btn-tap pr flex color-fff f32 open" data-bind="css:{shut:!isHanle(),open:isHanle},click:changeHanle">
+            <p class="flex-1 tc">是</p>
+            <p class="flex-1 tc">否</p>
+            <p class="ball pa"></p>
+          </div>
+        </li>
+        <!--/ko-->
+      </ul>
+    </article>
+    <article class="bbd7d7d7" data-bind="css:{none:isHanle()}">
+      <p class="label-colum">陈列信息</p>
+      <ul class="pl20 pr20 bg-fff f30">
+        <li class="column-item flex">
+          <p class="flex-1" data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status!=app.const.E0060}" >执行开始</p>
+          <input class="input-info db flex-1 tr" id="beginTime" data-bind="value:storeDiplay().executeStartTimeText" readonly type="text" placeholder="请选择时间"/>
+          <p class="input-info"></p>
+          <p class="btn-more ml15"  data-bind="css:{none:storeDiplay().status().status==app.const.E0060}"></p>
+        </li>
+        <li class="column-item flex" data-bind="css:{none:storeDiplay().status().status!=app.const.E0060}">
+          <p class="flex-1" data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status==app.const.E0060}" >执行结束</p>
+          <input class="input-info db flex-1 tr" id="endTime" data-bind="value:storeDiplay().executeEndTimeText" type="text" placeholder="请选择时间"/>
+          <p class="btn-more ml15"></p>
+        </li>
+        <li class="column-item flex">
+          <p class="flex-1" data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status!=app.const.E0060}">陈列类型</p>
+          <div class="flex-1 tr pr">
+            <select class="select-info pa top right opa"  data-bind="options: typeCodeList, optionsText: 'typeName', value: selectTypeCode,disable:storeDiplay().status().status==app.const.E0060">
+              <option>堆头（个）</option>
+            </select>
+            <div class="cover-select select-info pr15" data-bind="text:selectTypeCode()?selectTypeCode().typeName : '请选择'"></div>
+          </div>
+          <p class="color-666" data-bind="css:{none:storeDiplay().status().status!=app.const.E0060}">；数量<span><!-- ko text:storeDiplay().volume --><!-- /ko -->个</span></p>
+          <p class="btn-more" data-bind="css:{none:storeDiplay().status().status==app.const.E0060}"></p>
+        </li>
+        <li class="column-item flex" data-bind="css:{none:storeDiplay().status().status==app.const.E0060}">
+          <p data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status!=app.const.E0060}" >数量</p>
+          <input class="input-info db flex-1 tr" id="numInput" data-bind="value:storeDiplay().volume,attr:{readonly:storeDiplay().status().status==app.const.E0060},click:numReSet" type="text" placeholder="请填写数量"/>
+        </li>
+        <li class="column-item flex">
+          <p data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status!=app.const.E0060}" >面积(㎡)</p>
+          <input class="input-info db flex-1 tr" id="areaInput" data-bind="value:storeDiplay().area,attr:{readonly:storeDiplay().status().status==app.const.E0060},click:areaReSet" type="text"  placeholder="请填写面积"/>
+        </li>
+        <li class="column-item flex">
+          <p data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status!=app.const.E0060}" >陈列位置</p>
+          <input class="input-info db flex-1 tr" id="displayInput" data-bind="value:storeDiplay().displayLocation,attr:{readonly:storeDiplay().status().status==app.const.E0060},click:displayReSet" type="text" maxlength="15" placeholder="请填写陈列位置"/>
+        </li>
+      </ul>
+    </article>
+    <article class="bbd7d7d7" data-bind="css:{none:isHanle()}">
+      <p class="label-colum" data-bind="css:{'icon-require':isHanle()||storeDiplay().status().status!=app.const.E0060}" >陈列产品</p>
+      <ul class="pl20 pr20 bg-fff f30" data-bind="foreach:storeDiplay().prdList">
+        <li class="column-product flex" data-bind="style:{border:$root.storeDiplay().status().status==app.const.E0060 && $index()==$root.storeDiplay().prdList.length?'none':''}">
+          <p class="flex-1" data-bind="text:prdName">机洗至尊</p>
+          <p class="btn-del ml15" data-bind="click:$root.removePrd,css:{none:$root.storeDiplay().status().status==app.const.E0060}"></p>
+        </li>
+      </ul>
+      <p class="pl20 pr20 pt20 pb20 bg-fff tc color-1eb8ff" data-bind="click:selectProduct,css:{none:storeDiplay().status().status==app.const.E0060}">
+        <span class="f30 mr15">+</span><span class="f30">添加产品</span>
+      </p>
+    </article>
+    <article class="bbd7d7d7" data-bind="css:{none:isHanle()}">
+      <p class="label-colum"><span class="icon-require">陈列照片</span><span class="ml5">(上传1-3张照片)</span></p>
+
+      <ul class="column-pic clearfix bg-fff" data-bind="foreach:storeDiplay().photoList">
+        <li class="item-pic">
+          <div class="contain-pic pr boxc">
+            <input type="file" class="w h pa top left opa" accept="image/*" data-bind="fileInput:$data,disable:filePath()!=null,css:{none:filePath()"/>
+            <img class="pic" data-bind="attr:{src:filePath},css:{none:!filePath()}"/>
+            <i class="sign pa right top" data-bind="css:{none:!filePath()},click:$root.removePic"></i>
+          </div>
+        </li>
+      </ul>
+    </article>
+    <!-- 不执行显示 -->
+    <article class="bbd7d7d7" data-bind="css:{none:!isHanle()}">
+      <p class="label-colum icon-require">不执行原因</p>
+      <div class="column-tab clearfix bg-fff bbd7d7d7" data-bind="foreach:notExecuReasonList">
+        <p class="item-tab fl" data-bind="text:typeName,click:$root.selectNotExecuReason,css:{active:isCheck()}">门店未收到总部发文</p>
+      </div>
+    </article>
+    <article class="bbd7d7d7" style="margin-bottom: 4rem;">
+      <p class="label-colum" data-bind="css:{ 'icon-require':isHanle()}">说明</p>
+      <input class="w pt30 pb30 pl20 pr20 border-none boxb bg-fff color-333 f30" data-bind="value:storeDiplay().remark" placeholder="补充说明，限制80字" maxlength="80"/>
+    </article>
+  </div>
+  <article class="column-btn">
+    <div class="btn-handle tc f34" data-bind="click:submit,css:{none:!isHanle()},disable:isSubmit">保存</div>
+    <div class="btn-handle tc f34" data-bind="click:submit,css:{none:isHanle()||storeDiplay().status().status==app.const.E0060,disable:isSubmit}">开始执行</div>
+    <div class="btn-handle tc f34" data-bind="click:submit,css:{none:storeDiplay().status().status!=app.const.E0060},disable:isSubmit">执行结束</div>
+  </article>
+</section>

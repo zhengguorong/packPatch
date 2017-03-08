@@ -1,0 +1,22 @@
+<section id="changePwdPage">
+  <ul class="mt5">
+    <li class="flex pr mt30 pl20 pt10 pb10 pr20 bg-fff f28">
+      <p class="change-tap color-333">当前密码</p>
+      <input class="change-input db flex-1 pl20" type="password" placeholder="请输入当前密码" data-bind="value:oldPwd,valueUpdate:'afterkeydown'" maxlength="18" />
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="css:{none:!oldPwd()},click:cleanTxt.bind($data,oldPwd)"></div>
+    </li>
+    <li class="flex pr mt20 pl20 pt10 pb10 pr20 bg-fff f28">
+      <p class="change-tap color-333">新密码</p>
+      <input class="change-input db flex-1 pl20" type="password" placeholder="请输入8-18位数字和字母密码" data-bind="value:newPwd,valueUpdate:'afterkeydown'" maxlength="18"/>
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="css:{none:!newPwd()},click:cleanTxt.bind($data,newPwd)"></div>
+    </li>
+    <li class="flex pr mt20 pl20 pt10 pb10 pr20 bg-fff f28">
+      <p class="change-tap color-333">确认密码</p>
+      <input class="change-input db flex-1 pl20" type="password" placeholder="请再次输入密码" data-bind="value:rePwd,valueUpdate:'afterkeydown'" maxlength="18"/>
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="css:{none:!rePwd()},click:cleanTxt.bind($data,rePwd)"></div>
+    </li>
+  </ul>
+  <div class="mt50 pl100 pr100">
+    <button class="btn w f30" data-bind="disable:!(oldPwd()&&newPwd()&&rePwd()),css:{'btn-confirm':oldPwd()||newPwd()||rePwd(),'btn-cancel':!(oldPwd()&&newPwd()&&rePwd())},click:changePwd">提交</button>
+  </div>
+</section>

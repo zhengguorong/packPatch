@@ -1,0 +1,73 @@
+<section class="pr" id="storeFlowPage">
+  <header>
+    <div class="header-main pr bg-1fb8ff tc color-fff">
+      <div class="contain-left pa ml20" data-bind="click:goBack">
+      </div>
+      <p class="title-header" data-bind="text:title"></p>
+      <div class="pa right top pr20" data-bind="click:addSwitch"><img src="./images/icon/add@2x@0.5x.7b148e28.png" style="width: 1.1rem; margin-top: -3px;" class="mr10" alt=""/></div>
+    </div>
+  </header>
+  <article class="container-store ova">
+    <div class="column-nav">
+      <p class="title bg-fff" data-bind="text:itemList().storeName">金华-世纪华联-义乌南门店义乌南门店义乌南门店义乌南门店义乌南门店义乌南门店</p>
+      <ul class="list-nav flex">
+        <li class="item-nav flex-1 active" data-bind="click:function(){timeType('MONTH_TYPE')},css:{active:timeType()=='MONTH_TYPE'}">
+          <div class="contain-nav">
+            <p class="type f28">月<span class="f20">(客流量)</span></p>
+            <p class="num f20"><!-- ko text:itemList().monthNum -->10<!-- /ko -->条</p>
+          </div>
+        </li>
+        <li class="item-nav flex-1" data-bind="click:function(){timeType('DAY_TYPE')},css:{active:timeType()=='DAY_TYPE'}">
+          <div class="contain-nav">
+            <p class="type f28">日<span class="f20">(客流量)</span></p>
+            <p class="num f20"><!-- ko text:itemList().dayNum -->10<!-- /ko -->条</p>
+          </div>
+        </li>
+        <li class="item-nav flex-1" data-bind="click:function(){timeType('TIME_TYPE')},css:{active:timeType()=='TIME_TYPE'}">
+          <div class="contain-nav">
+            <p class="type f28">时段<span class="f20">(客流量)</span></p>
+            <p class="num f20"><!-- ko text:itemList().timeNum -->10<!-- /ko -->条</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul data-bind="foreach:itemList().customerVoList">
+        <li class="item-record pr color-666 f28">
+          <div class="column-date flex f26" data-bind="click:$root.flowDetail">
+            <p class="flex-1" data-bind="visible:$root.timeType()=='MONTH_TYPE'">日期：<span data-bind="text:app.util.formatDate(startDate)">2016/08/10</span> 至 <span data-bind="text:app.util.formatDate(endDate)">2016/08/10</span></p>
+            <p class="flex-1" data-bind="visible:$root.timeType()=='DAY_TYPE'">日期：<span data-bind="text:app.util.formatDate(startDate)">2016/08/10</span></p>
+            <p class="flex-1" data-bind="visible:$root.timeType()=='TIME_TYPE'">日期：<span data-bind="text:app.util.formatDate(startDate)">2016/08/10</span><span class="ml20" data-bind="text:app.util.formatTimeMin(startDate)">2016/08/10</span>-<span data-bind="text:app.util.formatTimeMin(endDate)">2016/08/10</span></p>
+            <p class="btn-more"></p>
+          </div>
+          <div class="column-data">
+            <div class="item-data">
+              <span class="label-name vm"><!-- ko text:$root.timeTypeLabel -->月<!-- /ko -->进店人数:</span>
+              <span class="label-num vm"><!-- ko text:personNum -->10<!-- /ko -->人</span>
+            </div>
+            <div class="item-data">
+              <span class="label-name vm"><!-- ko text:$root.timeTypeLabel -->月<!-- /ko -->成交额:</span>
+              <span class="label-num vm">
+                <!-- ko if:$root.timeType()!='TIME_TYPE' && ($root.timeType()!='DAY_TYPE' ||sumPrice>=10000)--><!-- ko text:app.util.toFixedTwo(sumPrice/10000) -->10<!-- /ko -->万元<!-- /ko -->
+                <!-- ko if:($root.timeType()!='MONTH_TYPE' && sumPrice<10000) || $root.timeType()=='TIME_TYPE'--> <!-- ko text:sumPrice -->10<!-- /ko -->元<!-- /ko -->
+              </span>
+            </div>
+            <div class="item-data" data-bind="visible:$root.timeType()=='MONTH_TYPE'">
+              <span class="label-name vm">日均成交额:</span>
+              <span class="label-num vm"><!-- ko text:app.util.toFixedTwo(averageSumPrice/10000)-->10<!-- /ko -->万元</span>
+            </div>
+          </div>
+          <p class="btn-edit pa right bottom" data-bind="click:$root.edit">编辑</p>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="column-add pa top left right bottom" data-bind="visible:isShowAdd()">
+    <p class="pa top left right bottom" data-bind="click:addSwitch"></p>
+    <ul class="w pa bottom bg-fff">
+      <li class="p30 tc color-333 f30 solid-bottom-e5e5e5" data-bind="click:addMonthly">添加月客流量</li>
+      <li class="p30 tc color-333 f30 solid-bottom-e5e5e5" data-bind="click:addDaily">添加日客流量</li>
+      <li class="p30 tc color-333 f30 solid-bottom-e5e5e5" data-bind="click:addPeriod">添加时段客流量</li>
+    </ul>
+  </article>
+</section>

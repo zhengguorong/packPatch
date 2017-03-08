@@ -1,0 +1,30 @@
+<section id="uploadPage">
+  <article class="p20 clearfix" >
+      <div data-bind="foreach:loadPicList">
+        <div class="upload-item-box">
+          <div class="upload-item pr">
+            <img class="w h " data-bind="attr: { src:filePath },click:$parent.glass.bind($data,filePath)"/>
+            <span class="upload-del pa" data-bind="click:$root.clearToloadPicList"></span>
+          </div>
+        </div>
+      </div>
+      <div data-bind="foreach:picList">
+        <div class="upload-item-box">
+          <div class="upload-item pr" data-bind="css:{default:!dataURL()}" >
+            <img class="w h " data-bind="css:{none:!dataURL()},attr: { src:dataURL },click:$parent.glass.bind($data,dataURL())"/>
+            <span class="upload-del pa" data-bind="click:$root.onClear"></span>
+            <input type="file" class="pa top bottom w opa" accept="image/*" data-bind="fileInput: $data,disable:dataURL(),css:{none:dataURL()}"   />
+          </div>
+        </div>
+      </div>
+  </article>
+  <div class="mt20 pl50 pr50 color-999 f24">
+    <button class="btn btn-upload w color-fff f30" data-bind="click:selectStore,disable:isSubmit()">上 传</button>
+    <p class="mt50">说明：</p>
+    <p class="mt20">1、最多上传6张图片</p>
+    <p class="mt10">2、每张图片不能大于5M</p>
+  </div>
+  <div class="img-glass-cover pf bottom left right" data-bind="visible:isGlass(),click:hideGlass">
+    <img class="img-glass" data-bind="attr:{src:selectedImg}"/>
+  </div>
+</section>

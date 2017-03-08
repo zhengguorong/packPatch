@@ -1,0 +1,18 @@
+<section class="pf top bottom left right" id="loginPage">
+  <img class="login-logo bc" src="./images/icon/logo-white@3x.e875004e.png"/>
+  <img class="sfa-logo bc" src="./images/icon/SFAlogo@3x.55f535bb.png"/>
+  <div class="pl100 pr100 mt50">
+    <div class="pr">
+      <input class="login-input login-account f28" type="tel" placeholder="请输入员工编号" data-bind="value:userName,valueUpdate:'afterkeydown'"/>
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="click:cleanTxt.bind($data,userName),css:{none:!userName()}"></div>
+    </div>
+    <div class="pr">
+      <input class="login-input login-pwd f28" type="password" placeholder="请输入密码" data-bind="value:psw,valueUpdate:'afterkeydown'"/>
+      <div class="btn-clear pa right top bottom vc mr20" data-bind="click:cleanTxt.bind($data,psw),css:{none:!psw()}"></div>
+    </div>
+    <button class="btn btn-login color-1fb8ff" data-bind="click:login">登 录</button>
+    <div class="pt30 tr color-fff f28">
+      <div  class="btn-forgetPwd dib pt30 pl30 pb30 pl10 border-none bg-transparent color-8fdcff" data-bind="click:goToForgetPwd">忘记密码?</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+<section id="storeInfoPage">
+  <ul data-bind="visible:storList().length!=0 && switchTab()=='attent'" class="bg-fff">
+    <!-- ko foreach:storList -->
+    <li class="store-item flex pl20 f24 color-999">
+      <img class="store-icon" src="./images/icon/icon-shop@3x.73887a92.png"/>
+      <div class="info-store flex-1 pt30 pb30 pr20 f28">
+        <p class="f32 color-333"><span data-bind="text:storeId"></span>&nbsp;<span data-bind="text:storeName"></span></p>
+        <p class="mt20"><span data-bind="text:address"></span></p>
+        <p class="mt15">
+          <span data-bind="text:app.util.formatDate(dateFrom)"></span> 至
+          <span data-bind="text:app.util.formatDate(dateTo)"></span>
+        </p>
+      </div>
+    </li>
+    <!-- /ko -->
+  </ul>
+  <ul data-bind="visible:conteactStorList().length!=0 && switchTab()=='contact'" class="bg-fff">
+    <!-- ko foreach:conteactStorList -->
+    <li class="store-item flex pl20 f24 color-999">
+      <img class="store-icon" src="./images/icon/icon-shop@3x.73887a92.png"/>
+      <div class="info-store flex-1 pt30 pb15 pr20 f28">
+        <p class="f32 color-333"><span data-bind="text:storeId"></span>&nbsp;<span data-bind="text:storeName"></span></p>
+        <p class="mt20"><span data-bind="text:address"></span></p>
+        <div class="flex mt15 lh100">
+          <div>承包日期：</div>
+          <div class="flex-1" data-bind="foreach:dateList">
+            <p class="mb15"><span data-bind="text:app.util.formatDate(dateFrom)"></span> 至 <span data-bind="text:app.util.formatDate(dateTo)"></span></p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- /ko -->
+  </ul>
+  <ul data-bind="visible:controlStorList().length!=0 && switchTab()=='control',foreach:controlStorList" >
+    <li class="item-control mt30" data-bind="click:$root.gotoDetail">
+      <div class="pl20">
+        <p class="pt30 pb30 f32 solid-bottom-e5e5e5"><!-- ko text:storeId --><!-- /ko --> <!-- ko text:storeName --><!-- /ko --></p>
+      </div>
+      <p class="column f28 color-666">当前驻店：<span class="color-1fb8ff"><!-- ko text:hasBpNum --><!-- /ko -->人</span></p>
+      <div class="column column-time f28 color-666" data-bind="foreach:dateList">
+        <p>
+          <span class="vm"><!-- ko text:app.util.formatDate(dateFrom) --><!-- /ko -->-<!-- ko text:app.util.formatDate(dateTo) --><!-- /ko --></span>
+          <span class="ml20 color-1fb8ff vm" data-bind="text:statusDesc">未来有效</span>
+        </p>
+      </div>
+      <p class="column column-address f28 color-666" data-bind="text:address">南京市鼓楼区开发大道126号</p>
+    </li>
+  </ul>
+  <!-- 门店为空模块 start-->
+  <article class="column-store-null"  data-bind="visible:isShowEmpty()">
+    <img class="store-null-icon" src="./images/icon/store-null@3x.e9386b92.png"/>
+    <p class="tc f28 color-999" data-bind="text:emptyLabel"></p>
+  </article>
+  <!-- 门店为空模块 end-->
+  <div style="height: 2.45rem;"></div>
+  <nav class="nav-store flex bg-fff f20 color-999">
+    <div class="item-store flex-1 tc" data-bind="click:changeTab.bind($data,'attent'),css:{active:switchTab()=='attent'}">
+      <p class="icon-store" id="attent"></p>
+      <p class="label-shop">出勤门店</p>
+    </div>
+    <div class="item-store flex-1 tc" data-bind="click:changeTab.bind($data,'control'),css:{active:switchTab()=='control'}">
+      <p class="icon-store" id="contact"></p>
+      <p class="label-shop">责任门店</p>
+    </div>
+  </nav>
+</section>
