@@ -1,1 +1,1 @@
-var app={};app.PLATFORM_LOCAL="local",app.PLATFORM_DEV="dev",app.PLATFORM_PROD="prod",app.PLATFORM_MOCK="mock",app.PLATFORM_PROD_TEST="prod-test",app.platform=app.PLATFORM_DEV,app.platform=app.PLATFORM_PROD;
+var app={};app.PLATFORM_LOCAL="local",app.PLATFORM_DEV="dev",app.PLATFORM_PROD="prod",app.PLATFORM_MOCK="mock",app.PLATFORM_PROD_TEST="prod-test",app.platform=app.PLATFORM_DEV,app.platform=app.PLATFORM_DEV;
